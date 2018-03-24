@@ -43,7 +43,7 @@ include "includes/navigation.php";
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span><?php echo $postDate ?></p>
                     <hr>
-                    <img class="img-responsive" src="http://placehold.it/900x300" alt="">
+                    <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
                     <hr>
                     <p><?php echo $postContent ?></p>
                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
