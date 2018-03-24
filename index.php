@@ -41,7 +41,7 @@ include "includes/navigation.php";
                     <p class="lead">
                         by <a href="index.php"><?php echo $postAuthor ?></a>
                     </p>
-                    <p><span class="glyphicon glyphicon-time"></span><?php echo $postDate ?></p>
+                    <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate ?></p>
                     <hr>
                     <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
                     <hr>
