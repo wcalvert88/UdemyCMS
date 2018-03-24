@@ -4,7 +4,6 @@ include "includes/header.php";
 
     <div id="wrapper">
 
-
         <!-- Navigation -->
         <?php include "includes/navigation.php"; ?>
 
@@ -19,7 +18,15 @@ include "includes/header.php";
                             Welcome to Admin
                             <small>Author</small>
                         </h1>
-                        
+                        <div class="col-xs-6">
+                            <form action="">
+                            <div class="form-group">
+                            <label for="catTitle">Add Category</label>
+                            <input class="form-control" type="text" name="catTitle"></div>
+                            <div class="form-group">
+                            <input class="btn btn-primary" type="submit" name="submit" value="Add Category"></div>
+                            </form>
+                        </div>
                     </div>
                 </div>
                 <!-- /.row -->
