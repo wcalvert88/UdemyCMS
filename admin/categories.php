@@ -28,6 +28,11 @@ include "includes/adminHeader.php";
                             </form>
                         </div><!-- Add Category Form-->
 <div class="col-xs-6"></div>
+<?php 
+    $query = "SELECT * FROM categories";
+    $selectCategories = mysqli_query($connection, $query);
+    
+    ?>
                         <div class="col-xs-6">
                             <table class="table table-bordered table-hover">
                                 <thead>
@@ -37,10 +42,16 @@ include "includes/adminHeader.php";
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Baseball Category</td>
-                                        <td>BasketBall Category</td>
-                                    </tr>
+                                <?php
+                while($row = mysqli_fetch_assoc($selectCategories)) {
+                    $catId = $row['cat_id'];
+            $catTitle = $row['cat_title'];
+            echo "<tr>";
+            echo "<td>{$catId}</td>";
+            echo "<td>{$catTitle}</td>";
+            echo "</tr>";
+            }
+            ?>
                                 </tbody>
                             </table>
                         </div>
