@@ -19,7 +19,39 @@ include "includes/adminHeader.php";
                             <small>Author</small>
                         </h1>
                         <div class="col-xs-6">
-                            <form action="">
+
+                            <?php 
+                            if (isset($_POST['submit'])) {
+                                $catTitle = $_POST['catTitle'];
+
+                                if ($catTitle == "" || empty($catTitle)) {
+
+                                    echo "This field should not be empty";
+                                } else {
+                                    $query = "INSERT INTO categories(cat_title) ";
+                                    $query .= "VALUE('{$catTitle}')";
+                                    $createCategoryQuery = mysqli_query($connection, $query);
+                                    if (!$createCategoryQuery) {
+                                        die('QUERY FAILED' . mysqli_error($connection));
+                                    }
+                                }
+
+
+
+
+                            }
+                            
+                            
+                            
+                            
+                            ?>
+
+
+
+
+
+
+                            <form action="" method="post">
                             <div class="form-group">
                             <label for="catTitle">Add Category</label>
                             <input class="form-control" type="text" name="catTitle"></div>
