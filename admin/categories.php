@@ -58,6 +58,36 @@ include "includes/adminHeader.php";
                             <div class="form-group">
                             <input class="btn btn-primary" type="submit" name="submit" value="Add Category"></div>
                             </form>
+
+
+                            <form action="" method="post">
+                            <div class="form-group">
+                            <label for="catTitle">Edit Category</label>
+                            <?php 
+                            if (isset($_GET['edit'])) {
+                                $catId = $_GET['edit'];
+                            $query = "SELECT * FROM categories WHERE cat_id = {$catId}";
+                                $selectCategoriesId = mysqli_query($connection, $query);
+                                while($row = mysqli_fetch_assoc($selectCategoriesId)) {
+                                    $catId = $row['cat_id'];
+                                    $catTitle = $row['cat_title'];
+
+                                    ?>
+                                    <input value="<?php if(isset($catTitle)) { echo $catTitle;} ?>" class="form-control" type="text" name="catTitle">
+                                    <?php
+                                }
+                            
+                            }
+                            
+                            
+                            ?>
+                            </div>
+                            <div class="form-group">
+                            <input class="btn btn-primary" type="submit" name="submit" value="Update Category"></div>
+                            </form>
+
+
+
                         </div><!-- Add Category Form-->
 <div class="col-xs-6"></div>
 <?php 
@@ -84,6 +114,7 @@ include "includes/adminHeader.php";
                                     echo "<td>{$catId}</td>";
                                     echo "<td>{$catTitle}</td>";
                                     echo "<td><a href='categories.php?delete={$catId}'>Delete</a></td>";
+                                    echo "<td><a href='categories.php?edit={$catId}'>Edit</a></td>";
                                     echo "</tr>";
                                 }
                                 ?>
