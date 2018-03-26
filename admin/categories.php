@@ -61,8 +61,7 @@ include "includes/adminHeader.php";
                         </div><!-- Add Category Form-->
 <div class="col-xs-6"></div>
 <?php 
-    $query = "SELECT * FROM categories";
-    $selectCategories = mysqli_query($connection, $query);
+    
     
     ?>
                         <div class="col-xs-6">
@@ -75,15 +74,31 @@ include "includes/adminHeader.php";
                                 </thead>
                                 <tbody>
                                 <?php
-                while($row = mysqli_fetch_assoc($selectCategories)) {
-                    $catId = $row['cat_id'];
-            $catTitle = $row['cat_title'];
-            echo "<tr>";
-            echo "<td>{$catId}</td>";
-            echo "<td>{$catTitle}</td>";
-            echo "</tr>";
-            }
-            ?>
+                                // FIND ALL CATEGORIES QUERY.
+                                $query = "SELECT * FROM categories";
+                                $selectCategories = mysqli_query($connection, $query);
+                                while($row = mysqli_fetch_assoc($selectCategories)) {
+                                    $catId = $row['cat_id'];
+                                    $catTitle = $row['cat_title'];
+                                    echo "<tr>";
+                                    echo "<td>{$catId}</td>";
+                                    echo "<td>{$catTitle}</td>";
+                                    echo "<td><a href='categories.php?delete={$catId}'>Delete</a></td>";
+                                    echo "</tr>";
+                                }
+                                ?>
+
+                                <?php // DELETE QUERY
+                                if(isset($_GET['delete'])) {
+                                    $catIdDel = $_GET['delete'];
+                                $query = "DELETE FROM categories WHERE cat_id = {$catIdDel} ";
+                                $deleteQuery = mysqli_query($connection,$query);
+                                header("Location: categories.php");
+                                }
+                                
+                                
+                                
+                                ?>
                                 </tbody>
                             </table>
                         </div>
