@@ -31,8 +31,8 @@ include "includes/adminHeader.php";
                         }
                         
                         switch($source) {
-                            case "34";
-                                echo "34";
+                            case "add_post";
+                                include "includes/addPost.php";
                                 break;
                             case "100";
                                 echo "100";
