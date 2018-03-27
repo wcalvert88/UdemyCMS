@@ -19,7 +19,6 @@ include "includes/navigation.php";
                 <?php 
                 if (isset($_POST['submit'])){
                     $search =  $_POST['search'];
-
                     $query = "SELECT * FROM posts WHERE post_tags LIKE '%$search%'";
                     $searchQuery = mysqli_query($connection, $query);
 
@@ -38,7 +37,6 @@ include "includes/navigation.php";
                             $postDate = $row['post_date'];
                             $postImage = $row['post_image'];
                             $postContent = $row['post_content'];
-                            
                             ?>
         
                             <h1 class="page-header">

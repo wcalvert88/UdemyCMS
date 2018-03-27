@@ -33,10 +33,10 @@
             <ul class="list-unstyled">
                 <?php
                 while($row = mysqli_fetch_assoc($selectCategoriesSidebar)) {
-            $catTitle = $row['cat_title'];
-            echo "<li><a href='#'>{$catTitle}</a></li>";
-            }
-            ?>
+                    $catTitle = $row['cat_title'];
+                    echo "<li><a href='#'>{$catTitle}</a></li>";
+                }
+                ?>
 
             </ul>
         </div>
