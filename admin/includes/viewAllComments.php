@@ -28,7 +28,6 @@
 
             echo "<tr>";
             echo "<td>{$commentId}</td>";
-            //echo "<td>{$commentPostId}</td>";
             echo "<td>{$commentAuthor}</td>";
             echo "<td>{$commentContent}</td>";
             
@@ -47,11 +46,11 @@
 
             echo "<td>{$commentEmail}</td>";
             echo "<td>{$commentStatus}</td>";
+            echo "<td>Some Title</td>";
             echo "<td>{$commentDate}</td>";
-            echo "<td><a href='posts.php?source=edit_post&p_id={$postId}'>Approve</td>";
-            echo "<td><a href='posts.php?delete={$postId}'>Unapprove</td>";
-            // echo "<td><a href='posts.php?source=edit_post&p_id={$postId}'>Edit</td>";
-            echo "<td><a href='posts.php?delete={$postId}'>Delete</td>";
+            echo "<td><a href='posts.php?source=edit_post&p_id='>Approve</td>";
+            echo "<td><a href='posts.php?delete='>Unapprove</td>";
+            echo "<td><a href='posts.php?delete='>Delete</td>";
             echo "</tr>";
         }
         ?>

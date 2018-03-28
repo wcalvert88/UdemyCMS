@@ -62,17 +62,41 @@ include "includes/navigation.php";
 
 
                                 <!-- Blog Comments -->
+                <?php 
+                
+                if(isset($_POST['create_comment'])) {
+                    echo $_POST['comment_author'];
 
+                }
+                
+                
+                
+                ?>
                 <!-- Comments Form -->
                 <div class="well">
                     <h4>Leave a Comment:</h4>
-                    <form role="form">
+                    <form action="" method="post" role="form">
+
                         <div class="form-group">
-                            <textarea class="form-control" rows="3"></textarea>
+                            <label for="Author">Author</label>
+                            <input type="text" name="comment_author"
+                        class="form-control">
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+
+                        
+                        <div class="form-group">
+                            <label for="Email">Email</label>
+                            <input type="email" name="comment_email"
+                        class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="comment">Your Commment</label>
+                            <textarea name="comment_content" class="form-control" rows="3"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary" name="create_comment">Submit</button>
                     </form>
-                </div>
+                </>
 
                 <hr>
 
