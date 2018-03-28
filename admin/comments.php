@@ -38,7 +38,7 @@ include "includes/adminHeader.php";
                         include "includes/editPost.php";
                         break;
                     default;
-                        include "includes/viewAllPosts.php";
+                        include "includes/viewAllComments.php";
                         break;
                 }
                 ?>
