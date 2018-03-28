@@ -2,33 +2,33 @@
 include "includes/adminHeader.php";
 ?>
 
-    <div id="wrapper">
+<div id="wrapper">
 
 
-        <!-- Navigation -->
-        <?php include "includes/adminNavigation.php"; ?>
+    <!-- Navigation -->
+    <?php include "includes/adminNavigation.php"; ?>
 
-        <div id="page-wrapper">
+    <div id="page-wrapper">
 
-            <div class="container-fluid">
+        <div class="container-fluid">
 
-                <!-- Page Heading -->
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header">
-                            Welcome to Admin
-                            <small>Author</small>
-                        </h1>
-                        
-                    </div>
+            <!-- Page Heading -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <h1 class="page-header">
+                        Welcome to Admin
+                        <small>Author</small>
+                    </h1>
+                    
                 </div>
-                <!-- /.row -->
-
             </div>
-            <!-- /.container-fluid -->
+            <!-- /.row -->
 
         </div>
-        <!-- /#page-wrapper -->
+        <!-- /.container-fluid -->
+
+    </div>
+    <!-- /#page-wrapper -->
 <?php 
 include "includes/adminFooter.php";
 ?>
