@@ -21,6 +21,7 @@ include "includes/navigation.php";
                 $query = "SELECT * FROM posts";
                 $selectAllPostsQuery = mysqli_query($connection, $query);
                 while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
+                    $postId = $row['post_id'];
                     $postTitle = $row['post_title'];
                     $postAuthor = $row['post_author'];
                     $postDate = $row['post_date'];
@@ -36,14 +37,15 @@ include "includes/navigation.php";
 
                     <!-- First Blog Post -->
                     <h2>
-                        <a href="#"><?php echo $postTitle ?></a>
+                        <a href="post.php?p_id=<?php echo $postId; ?>"><?php echo $postTitle ?></a>
                     </h2>
                     <p class="lead">
                         by <a href="index.php"><?php echo $postAuthor ?></a>
                     </p>
                     <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate ?></p>
                     <hr>
-                    <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt="">
+                    <a href="post.php?p_id=<?php echo $postId; ?>">
+                    <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt=""></a>
                     <hr>
                     <p><?php echo $postContent ?></p>
                     <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
