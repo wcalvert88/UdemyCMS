@@ -82,7 +82,6 @@ if (isset($_POST['update_post'])) {
         
         ?>
 
-        <option value=""></option>
         </select>
     </div>
 
