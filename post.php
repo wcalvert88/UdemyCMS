@@ -73,10 +73,14 @@ include "includes/navigation.php";
                     $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
                     
                     $query .= "VALUES  ('{$postId}', '{$commentAuthor}', '{$commentEmail}', '{$commentContent}', 'unapproved', now() ) ";
+
                     $createCommentQuery = mysqli_query($connection,$query);
                     if (!$createCommentQuery) {
                         die("QUERY FAILED". mysqli_error($connection));
                     }
+                    $query = "UPDATE posts SET post_comment_count = post_comment_count + 1 ";
+                    $query .= "WHERE post_id = {$postId} ";
+                    $updateCommentCount = mysqli_query($connection,$query);
 
                 }
                 
