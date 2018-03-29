@@ -82,7 +82,7 @@ if(isset($_GET['delete'])){
 
 if(isset($_GET['unapprove'])){
     $theCommentId = $_GET['unapprove'];
-$query = "UPDATE comments SET comment_status = 'unapprove' WHERE comment_id = {$theCommentId}";
+$query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {$theCommentId}";
     $unapproveQuery = mysqli_query($connection, $query);
     if (!$unapproveQuery) {
         die ("QUERY FAILED" . mysqli_error($connection));
@@ -95,7 +95,7 @@ $query = "UPDATE comments SET comment_status = 'unapprove' WHERE comment_id = {$
 
 if(isset($_GET['approve'])){
     $theCommentId = $_GET['approve'];
-    $query = "UPDATE comments SET comment_status = 'approve' WHERE comment_id = {$theCommentId}";
+    $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = {$theCommentId}";
     $approveQuery = mysqli_query($connection, $query);
     header("Location: comments.php");
 
