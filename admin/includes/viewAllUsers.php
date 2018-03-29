@@ -7,7 +7,6 @@
             <th>Lastname</th>
             <th>Email</th>
             <th>Role</th>
-            <th>Date</th>
         </tr>
     </thead>
     <tbody>
@@ -32,23 +31,19 @@
             echo "<td>{$userLastname}</td>";
             echo "<td>{$userEmail}</td>";
             echo "<td>{$userRole}</td>";
-            echo "<td>now()</td>";
+            
             
 
-            $query = "SELECT * FROM posts WHERE post_id = {$userPostId} ";
-            $selectPostIdQuery = mysqli_query($connection, $query);
+            // $query = "SELECT * FROM posts WHERE post_id = {$userPostId} ";
+            // $selectPostIdQuery = mysqli_query($connection, $query);
 
-            while ($row = mysqli_fetch_assoc($selectPostIdQuery)) {
-                $postId = $row['post_id'];
-                $postTitle = $row['post_title'];
+            // while ($row = mysqli_fetch_assoc($selectPostIdQuery)) {
+            //     $postId = $row['post_id'];
+            //     $postTitle = $row['post_title'];
 
-            }
-
-
+            // }
 
 
-            echo "<td><a href='../post.php?p_id={$postId}'>$postTitle</a></td>";
-            echo "<td>{$userDate}</td>";
             echo "<td><a href='users.php?approve={$userId}'>Approve</td>";
             echo "<td><a href='users.php?unapprove={$userId}'>Unapprove</td>";
             echo "<td><a href='users.php?delete={$userId}'>Delete</td>";
