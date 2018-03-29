@@ -65,7 +65,14 @@ include "includes/navigation.php";
                 <?php 
                 
                 if(isset($_POST['create_comment'])) {
-                    echo $_POST['comment_author'];
+                     $postId = $_GET['p_id'];
+                     $commentAuthor = $_POST['comment_author'];
+                     $commentEmail = $_POST['comment_email'].
+                     $commentContent = $_POST['comment_Content'];
+
+                     $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";
+                     
+                     $query .= "VALUES  ('{$postId}', '{$commentAuthor}', '{$commentEmail}', '{$commentContent}', 'unapproved', now()) ";
 
                 }
                 
