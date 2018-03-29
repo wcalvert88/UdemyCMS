@@ -18,7 +18,7 @@ include "includes/navigation.php";
             <div class="col-md-8">
                 <?php 
                 
-                $query = "SELECT * FROM posts";
+                $query = "SELECT * FROM posts ";
                 $selectAllPostsQuery = mysqli_query($connection, $query);
                 while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
                     $postId = $row['post_id'];
@@ -27,6 +27,13 @@ include "includes/navigation.php";
                     $postDate = $row['post_date'];
                     $postImage = $row['post_image'];
                     $postContent = substr($row['post_content'], 0, 100);
+                    $postStatus = $row['post_status'];
+
+                    if ($postStatus !== 'published') {
+
+                        echo "<h1 class='text-center'> NO POST SORRY </h1>";
+
+                    } else {
                     
                     ?>
 
@@ -52,7 +59,7 @@ include "includes/navigation.php";
 
                     <hr>
                 <?php
-                }
+                }}
                 ?>
                 
             </div>
