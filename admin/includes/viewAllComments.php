@@ -46,7 +46,20 @@
 
             echo "<td>{$commentEmail}</td>";
             echo "<td>{$commentStatus}</td>";
-            echo "<td>Some Title</td>";
+
+            $query = "SELECT * FROM posts WHERE post_id = {$commentPostId} ";
+            $selectPostIdQuery = mysqli_query($connection, $query);
+
+            while ($row = mysqli_fetch_assoc($selectPostIdQuery)) {
+                $postId = $row['post_id'];
+                $postTitle = $row['post_title'];
+
+            }
+
+
+
+
+            echo "<td><a href='../post.php?p_id={$postId}'>$postTitle</a></td>";
             echo "<td>{$commentDate}</td>";
             echo "<td><a href='posts.php?source=edit_post&p_id='>Approve</td>";
             echo "<td><a href='posts.php?delete='>Unapprove</td>";
