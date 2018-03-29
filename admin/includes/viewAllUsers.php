@@ -12,39 +12,30 @@
     </thead>
     <tbody>
         <?php 
-        $query = "SELECT * FROM comments";
-        $selectComments = mysqli_query($connection, $query);
-        while($row = mysqli_fetch_assoc($selectComments)) {
-            $commentId = $row['comment_id'];
-            $commentPostId = $row['comment_post_id'];
-            $commentAuthor = $row['comment_author'];
-            $commentContent = $row['comment_content'];
-            $commentEmail = $row['comment_email'];
-            $commentStatus = $row['comment_status'];
-            $commentDate = $row['comment_date'];
+        $query = "SELECT * FROM users";
+        $selectUsers = mysqli_query($connection, $query);
+        while($row = mysqli_fetch_assoc($selectUsers)) {
+            $userId = $row['user_id'];
+            $username = $row['username'];
+            $userPassword = $row['user_password'];
+            $userFirstname = $row['user_firstname'];
+            $userLastname = $row['user_lastname'];
+            $userEmail = $row['user_email'];
+            $userImage = $row['user_image'];
+            $userRole = $row['user_role'];
 
             echo "<tr>";
-            echo "<td>{$commentId}</td>";
-            echo "<td>{$commentAuthor}</td>";
-            echo "<td>{$commentContent}</td>";
+            echo "<td>{$userId}</td>";
+            echo "<td>{$username}</td>";
+
+            echo "<td>{$userFirstname}</td>";
+            echo "<td>{$userLastname}</td>";
+            echo "<td>{$userEmail}</td>";
+            echo "<td>{$userRole}</td>";
+            echo "<td>now()</td>";
             
 
-            // $query = "SELECT * FROM categories WHERE cat_id = {$postCategoryId}";
-            // $selectCategoriesId = mysqli_query($connection, $query);
-            // while($row = mysqli_fetch_assoc($selectCategoriesId)) {
-            //     $catId = $row['cat_id'];
-            //     $catTitle = $row['cat_title'];
-
-
-            // echo "<td>{$catTitle}</td>";
-
-            // }
-
-
-            echo "<td>{$commentEmail}</td>";
-            echo "<td>{$commentStatus}</td>";
-
-            $query = "SELECT * FROM posts WHERE post_id = {$commentPostId} ";
+            $query = "SELECT * FROM posts WHERE post_id = {$userPostId} ";
             $selectPostIdQuery = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($selectPostIdQuery)) {
@@ -57,10 +48,10 @@
 
 
             echo "<td><a href='../post.php?p_id={$postId}'>$postTitle</a></td>";
-            echo "<td>{$commentDate}</td>";
-            echo "<td><a href='comments.php?approve={$commentId}'>Approve</td>";
-            echo "<td><a href='comments.php?unapprove={$commentId}'>Unapprove</td>";
-            echo "<td><a href='comments.php?delete={$commentId}'>Delete</td>";
+            echo "<td>{$userDate}</td>";
+            echo "<td><a href='users.php?approve={$userId}'>Approve</td>";
+            echo "<td><a href='users.php?unapprove={$userId}'>Unapprove</td>";
+            echo "<td><a href='users.php?delete={$userId}'>Delete</td>";
             echo "</tr>";
         }
         ?>
@@ -69,32 +60,32 @@
 
 <?php 
 if(isset($_GET['delete'])){
-    $theCommentId = $_GET['delete'];
-    $query = "DELETE FROM comments WHERE comment_id = {$theCommentId} ";
+    $theuserId = $_GET['delete'];
+    $query = "DELETE FROM users WHERE user_id = {$theuserId} ";
     $deleteQuery = mysqli_query($connection, $query);
 
-    header("Location: comments.php");
+    header("Location: users.php");
 
 }
 
 if(isset($_GET['unapprove'])){
-    $theCommentId = $_GET['unapprove'];
-$query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {$theCommentId}";
+    $theuserId = $_GET['unapprove'];
+$query = "UPDATE users SET user_status = 'unapproved' WHERE user_id = {$theuserId}";
     $unapproveQuery = mysqli_query($connection, $query);
     if (!$unapproveQuery) {
         die ("QUERY FAILED" . mysqli_error($connection));
     } else {
         echo "UNAPPROVED";
     }
-    header("Location: comments.php");
+    header("Location: users.php");
 
 }
 
 if(isset($_GET['approve'])){
-    $theCommentId = $_GET['approve'];
-    $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = {$theCommentId}";
+    $theuserId = $_GET['approve'];
+    $query = "UPDATE users SET user_status = 'approved' WHERE user_id = {$theuserId}";
     $approveQuery = mysqli_query($connection, $query);
-    header("Location: comments.php");
+    header("Location: users.php");
 
 }
 
