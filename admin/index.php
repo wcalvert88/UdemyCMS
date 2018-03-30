@@ -35,7 +35,17 @@ include "includes/adminHeader.php";
                                 <i class="fa fa-file-text fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                        <div class='huge'>12</div>
+                                <?php 
+                                
+                                $query = "SELECT * FROM posts";
+                                $selectAllPosts = mysqli_query($connection, $query);
+                                $postCounts = mysqli_num_rows($selectAllPosts);
+
+                                echo "<div class='huge'>{$postCounts}</div>";
+                                ?>
+
+
+                        
                                 <div>Posts</div>
                             </div>
                         </div>
