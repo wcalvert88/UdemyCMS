@@ -18,8 +18,6 @@ if (isset($_SESSION['username'])) {
         $userRole = $row['user_role'];
     }
 }
-                
-
 ?>
 <?php 
 
@@ -51,8 +49,6 @@ if(isset($_POST['edit_user'])) {
     confirmQuery($editUserQuery);
 }
 
-
-
 ?>
 <div id="wrapper">
 
@@ -64,74 +60,68 @@ if(isset($_POST['edit_user'])) {
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <div class="row">
-            <div class="col-lg-12">
+        <?php include "includes/adminHeading.php"; ?>
                 
-                <h1 class="page-header">
-                    Welcome to Admin
-                    <small>Author</small>
-                </h1>
-                
-                <form action="" method="post" enctype="multipart/form-data">
-                    <div class="form-group">
-                        <label for="user_firstname">Firstname</label>
-                        <input type="text" class="form-control" name="user_firstname" value=<?php echo $userFirstname;?>>
-                    </div>
-                    <br />
-                    <div class="form-group">
-                        <label for="user_lastname">Lastname</label>
-                        <input type="text" class="form-control" name="user_lastname" value=<?php echo $userLastname;?>>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="user_role">User Role</label>
-                        <br />
-                        <select name="user_role" id="">
-                            <option value="Subscriber"><?php echo $userRole; ?></options>
-                            <?php
-                            if ($userRole == 'admin') {
-                                echo "<option value='Subsriber'>Subscriber</option>";
-                            } else {
-                            echo "<option value='Admin'>Admin</option>";
-                            }
-                            ?>
-
-                        </select>
-                    </div>
-
-                    <!-- <div class="form-group">
-                        <label for="post_image">Post Image</label>
-                        <input type="file" name="image">
-                    </div> -->
-
-                    <div class="form-group">
-                        <label for="username">Username</label>
-                        <input type="text" class="form-control" name="username" value=<?php echo $username;?>>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="user_email">Email</label>
-                        <input type="email" class="form-control" name="user_email" value=<?php echo $userEmail;?>>
-                        </input>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="user_password">Password</label>
-                        <input type="password" class="form-control" name="user_password" value=<?php echo $userPassword;?>>
-                        </input>
-                    </div>
-
-                    <div class="form-group">
-                        <input type="submit" class="btn btn-primary" name="edit_user" value="Update Profile">
-                    </div>
-                </form>
-
+        <form action="" method="post" enctype="multipart/form-data">
+            <div class="form-group">
+                <label for="user_firstname">Firstname</label>
+                <input type="text" class="form-control" name="user_firstname" value=<?php echo $userFirstname;?>>
             </div>
-        </div>
-        <!-- /.row -->
+            <br />
+            <div class="form-group">
+                <label for="user_lastname">Lastname</label>
+                <input type="text" class="form-control" name="user_lastname" value=<?php echo $userLastname;?>>
+            </div>
+
+            <div class="form-group">
+                <label for="user_role">User Role</label>
+                <br />
+                <select name="user_role" id="">
+                    <option value="Subscriber"><?php echo $userRole; ?></options>
+                    <?php
+                    if ($userRole == 'admin') {
+                        echo "<option value='Subsriber'>Subscriber</option>";
+                    } else {
+                    echo "<option value='Admin'>Admin</option>";
+                    }
+                    ?>
+
+                </select>
+            </div>
+
+            <!-- <div class="form-group">
+                <label for="post_image">Post Image</label>
+                <input type="file" name="image">
+            </div> -->
+
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" class="form-control" name="username" value=<?php echo $username;?>>
+            </div>
+
+            <div class="form-group">
+                <label for="user_email">Email</label>
+                <input type="email" class="form-control" name="user_email" value=<?php echo $userEmail;?>>
+                </input>
+            </div>
+
+            <div class="form-group">
+                <label for="user_password">Password</label>
+                <input type="password" class="form-control" name="user_password" value=<?php echo $userPassword;?>>
+                </input>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" class="btn btn-primary" name="edit_user" value="Update Profile">
+            </div>
+        </form>
 
     </div>
-    <!-- /.container-fluid -->
+</div>
+<!-- /.row -->
+
+</div>
+<!-- /.container-fluid -->
 
 </div>
 <!-- /#page-wrapper -->
