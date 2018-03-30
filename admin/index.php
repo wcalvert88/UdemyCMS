@@ -142,6 +142,22 @@ include "includes/adminHeader.php";
     </div>
         <!-- /.row -->
 
+    <?php 
+    $query = "SELECT * FROM posts WHERE post_status = 'draft' ";
+    $selectAllDraftPosts = mysqli_query($connection, $query);
+    $postDraftCounts = mysqli_num_rows($selectAllDraftPosts);
+
+    $query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ";
+    $selectAllCommentUnapprove = mysqli_query($connection, $query);
+    $commentUnapproveCounts = mysqli_num_rows($selectAllCommentUnapprove);
+    
+    $query = "SELECT * FROM users WHERE user_role = 'subscriber' ";
+    $selectAllUserRole = mysqli_query($connection, $query);
+    $userRoleCounts = mysqli_num_rows($selectAllUserRole);
+    ?>
+
+
+
     <div class="row">
     <script type="text/javascript">
       google.charts.load('current', {'packages':['bar']});
@@ -153,15 +169,12 @@ include "includes/adminHeader.php";
 
             <?php 
             
-            $elementText = ['Active Posts', 'Comments', 'Users', 'Categories'];
-            $elementCount = [$postCounts, $commentCounts, $userCounts, $categoryCounts];
+            $elementText = ['Active Posts', 'Draft Posts','Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
+            $elementCount = [$postCounts,$postDraftCounts, $commentCounts, $commentUnapproveCounts, $userCounts, $userRoleCounts, $categoryCounts];
 
             for ($i = 0; $i < count($elementText); $i++) {
                 echo "['{$elementText[$i]}'" . "," . "{$elementCount[$i]}],";
-            }
-            
-            
-            
+            }            
             ?>
         ]);
 

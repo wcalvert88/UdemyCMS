@@ -66,7 +66,7 @@ if(isset($_GET['delete'])){
 
 if(isset($_GET['change_to_sub'])){
     $theuserId = $_GET['change_to_sub'];
-    $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = {$theuserId}";
+    $query = "UPDATE users SET user_role = 'Subscriber' WHERE user_id = {$theuserId}";
     $changeSubQuery = mysqli_query($connection, $query);
 
     header("Location: users.php");
@@ -75,7 +75,7 @@ if(isset($_GET['change_to_sub'])){
 
 if(isset($_GET['change_to_admin'])){
     $theuserId = $_GET['change_to_admin'];
-    $query = "UPDATE users SET user_role = 'admin' WHERE user_id = {$theuserId}";
+    $query = "UPDATE users SET user_role = 'Admin' WHERE user_id = {$theuserId}";
     $changeAdminQuery = mysqli_query($connection, $query);
     header("Location: users.php");
 
