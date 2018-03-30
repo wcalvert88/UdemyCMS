@@ -150,7 +150,19 @@ include "includes/adminHeader.php";
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['Data', 'Count'],
-          ['Posts', 1000]
+
+            <?php 
+            
+            $elementText = ['Active Posts', 'Comments', 'Users', 'Categories'];
+            $elementCount = [$postCounts, $commentCounts, $userCounts, $categoryCounts];
+
+            for ($i = 0; $i < count($elementText); $i++) {
+                echo "['{$elementText[$i]}'" . "," . "{$elementCount[$i]}],";
+            }
+            
+            
+            
+            ?>
         ]);
 
         var options = {
