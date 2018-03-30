@@ -24,16 +24,11 @@ while ($row = mysqli_fetch_array($selectUserQuery)) {
     $dbUserRole = $row['user_role'];
 }
 
-if ($username !== $dbUsername && $password !== $dbUserPassword) {
-    header("Location: ../index.php");
-} else if ($username == $dbUsername && $password == $dbUserPassword) {
+if ($username === $dbUsername && $password === $dbUserPassword) {
     $_SESSION['username'] = $dbUsername;
     $_SESSION['firstname'] = $dbFirstname;
     $_SESSION['lastname'] = $dbLastname;
     $_SESSION['userRole'] = $dbUserRole;
-    
-
-
     header("Location: ../admin");
 } else {
     header("Location: ../index.php");
