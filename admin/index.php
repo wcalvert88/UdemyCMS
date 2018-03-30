@@ -67,7 +67,15 @@ include "includes/adminHeader.php";
                                 <i class="fa fa-comments fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                            <div class='huge'>23</div>
+                            <?php 
+                                
+                                $query = "SELECT * FROM comments";
+                                $selectAllComments = mysqli_query($connection, $query);
+                                $commentCounts = mysqli_num_rows($selectAllComments);
+
+                                echo "<div class='huge'>{$commentCounts}</div>";
+                                ?>
+
                             <div>Comments</div>
                             </div>
                         </div>
@@ -89,7 +97,14 @@ include "includes/adminHeader.php";
                                 <i class="fa fa-user fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                            <div class='huge'>23</div>
+                            <?php 
+                                
+                                $query = "SELECT * FROM users";
+                                $selectAllUsers = mysqli_query($connection, $query);
+                                $userCounts = mysqli_num_rows($selectAllUsers);
+
+                                echo "<div class='huge'>{$userCounts}</div>";
+                                ?>
                                 <div> Users</div>
                             </div>
                         </div>
@@ -111,7 +126,14 @@ include "includes/adminHeader.php";
                                 <i class="fa fa-list fa-5x"></i>
                             </div>
                             <div class="col-xs-9 text-right">
-                                <div class='huge'>13</div>
+                            <?php 
+                                
+                                $query = "SELECT * FROM categories";
+                                $selectAllCategories = mysqli_query($connection, $query);
+                                $categoryCounts = mysqli_num_rows($selectAllCategories);
+
+                                echo "<div class='huge'>{$categoryCounts}</div>";
+                                ?>
                                 <div>Categories</div>
                             </div>
                         </div>
