@@ -44,8 +44,8 @@
             // }
 
 
-            echo "<td><a href='users.php?approve={$userId}'>Approve</td>";
-            echo "<td><a href='users.php?unapprove={$userId}'>Unapprove</td>";
+            echo "<td><a href='users.php?change_to_admin={$userId}'>Admin</td>";
+            echo "<td><a href='users.php?change_to_sub={$userId}'>Subscriber</td>";
             echo "<td><a href='users.php?delete={$userId}'>Delete</td>";
             echo "</tr>";
         }
@@ -63,23 +63,19 @@ if(isset($_GET['delete'])){
 
 }
 
-if(isset($_GET['unapprove'])){
-    $theuserId = $_GET['unapprove'];
-$query = "UPDATE users SET user_status = 'unapproved' WHERE user_id = {$theuserId}";
-    $unapproveQuery = mysqli_query($connection, $query);
-    if (!$unapproveQuery) {
-        die ("QUERY FAILED" . mysqli_error($connection));
-    } else {
-        echo "UNAPPROVED";
-    }
+if(isset($_GET['change_to_sub'])){
+    $theuserId = $_GET['change_to_sub'];
+    $query = "UPDATE users SET user_role = 'subscriber' WHERE user_id = {$theuserId}";
+    $changeSubQuery = mysqli_query($connection, $query);
+
     header("Location: users.php");
 
 }
 
-if(isset($_GET['approve'])){
-    $theuserId = $_GET['approve'];
-    $query = "UPDATE users SET user_status = 'approved' WHERE user_id = {$theuserId}";
-    $approveQuery = mysqli_query($connection, $query);
+if(isset($_GET['change_to_admin'])){
+    $theuserId = $_GET['change_to_admin'];
+    $query = "UPDATE users SET user_role = 'admin' WHERE user_id = {$theuserId}";
+    $changeAdminQuery = mysqli_query($connection, $query);
     header("Location: users.php");
 
 }
