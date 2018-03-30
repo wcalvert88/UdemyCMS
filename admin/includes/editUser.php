@@ -57,9 +57,14 @@ if(isset($_POST['create_user'])) {
         <label for="user_role">User Role</label>
         <br />
         <select name="user_role" id="">
-            <option value="subscriber">Select Options</options>
-            <option value="admin">Admin</option>
-            <option value="subsriber">Subscriber</option>
+            <option value="subscriber"><?php echo $userRole; ?></options>
+            <?php
+            if ($userRole == 'admin') {
+                echo "<option value='subsriber'>Subscriber</option>";
+            } else {
+            echo "<option value='admin'>admin</option>";
+            }
+            ?>
 
         </select>
     </div>
