@@ -29,11 +29,7 @@ include "includes/navigation.php";
                     $postContent = substr($row['post_content'], 0, 100);
                     $postStatus = $row['post_status'];
 
-                    if ($postStatus !== 'published') {
-
-                        echo "<h1 class='text-center'> NO POST SORRY </h1>";
-
-                    } else {
+                    if ($postStatus == 'published') {
                     
                     ?>
 
