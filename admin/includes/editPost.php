@@ -90,9 +90,19 @@ if (isset($_POST['update_post'])) {
         <input value="<?php echo $postAuthor; ?>" type="text" class="form-control" name="author">
     </div>
 
+
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input value="<?php echo $postStatus; ?>" type="text" class="form-control" name="post_status">
+        <select name="post_status" id="">
+            <option value='<?php echo $postStatus; ?>'><?php echo $postStatus; ?></option>
+            <?php 
+            if ($postStatus == 'Published') {
+                echo "<option value='Draft'>Draft</option>";
+            } else {
+                echo "<option value='Published'>Published</option>";
+            }
+            
+            ?>
+        </select>
     </div>
 
     <div class="form-group">
