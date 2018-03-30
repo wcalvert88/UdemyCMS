@@ -1,4 +1,5 @@
 <?php include "db.php"; ?>
+<?php session_start(); ?>
 <?php 
 
 if (isset($_POST['login'])) {
@@ -26,6 +27,13 @@ while ($row = mysqli_fetch_array($selectUserQuery)) {
 if ($username !== $dbUsername && $password !== $dbUserPassword) {
     header("Location: ../index.php");
 } else if ($username == $dbUsername && $password == $dbUserPassword) {
+    $_SESSION['username'] = $dbUsername;
+    $_SESSION['firstname'] = $dbFirstname;
+    $_SESSION['lastname'] = $dbLastname;
+    $_SESSION['userRole'] = $dbUserRole;
+    
+
+
     header("Location: ../admin");
 } else {
     header("Location: ../index.php");
