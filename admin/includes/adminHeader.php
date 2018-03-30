@@ -4,6 +4,22 @@
 include "../includes/db.php";
 include "functions.php";
 ?>
+
+<?php 
+if(isset($_SESSION['userRole'])) {
+    if ($_SESSION['userRole'] !== 'admin') {
+        header("Location: ../index.php");
+    }
+}
+
+
+
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
