@@ -1,0 +1,94 @@
+<?php 
+include "includes/adminHeader.php";
+
+if (isset($_SESSION['username'])) {
+    
+}
+                
+
+?>
+
+<div id="wrapper">
+
+<!-- Navigation -->
+<?php include "includes/adminNavigation.php"; ?>
+
+<div id="page-wrapper">
+
+    <div class="container-fluid">
+
+        <!-- Page Heading -->
+        <div class="row">
+            <div class="col-lg-12">
+                
+                <h1 class="page-header">
+                    Welcome to Admin
+                    <small>Author</small>
+                </h1>
+                
+                <form action="" method="post" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label for="user_firstname">Firstname</label>
+                        <input type="text" class="form-control" name="user_firstname" value=<?php echo $userFirstname;?>>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label for="user_lastname">Lastname</label>
+                        <input type="text" class="form-control" name="user_lastname" value=<?php echo $userLastname;?>>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_role">User Role</label>
+                        <br />
+                        <select name="user_role" id="">
+                            <option value="subscriber"><?php echo $userRole; ?></options>
+                            <?php
+                            if ($userRole == 'admin') {
+                                echo "<option value='Subsriber'>Subscriber</option>";
+                            } else {
+                            echo "<option value='Admin'>Admin</option>";
+                            }
+                            ?>
+
+                        </select>
+                    </div>
+
+                    <!-- <div class="form-group">
+                        <label for="post_image">Post Image</label>
+                        <input type="file" name="image">
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" class="form-control" name="username" value=<?php echo $username;?>>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_email">Email</label>
+                        <input type="email" class="form-control" name="user_email" value=<?php echo $userEmail;?>>
+                        </input>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user_password">Password</label>
+                        <input type="password" class="form-control" name="user_password" value=<?php echo $userPassword;?>>
+                        </input>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="submit" class="btn btn-primary" name="edit_user" value="Update User">
+                    </div>
+                </form>
+
+            </div>
+        </div>
+        <!-- /.row -->
+
+    </div>
+    <!-- /.container-fluid -->
+
+</div>
+<!-- /#page-wrapper -->
+<?php 
+include "includes/adminFooter.php";
+?>
