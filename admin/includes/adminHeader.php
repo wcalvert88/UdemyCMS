@@ -6,9 +6,13 @@ include "functions.php";
 ?>
 
 <?php 
-if(isset($_SESSION['userRole'])) {
+if(!isset($_SESSION['userRole'])) {
+
+    header("Location: ../index.php");
+} else {
     if ($_SESSION['userRole'] !== 'admin') {
         header("Location: ../index.php");
+
     }
 }
 
