@@ -15,7 +15,7 @@ $query = "SELECT * FROM users WHERE user_id = {$userId}";
         $userRole = $row['user_role'];
     }
 }
-if(isset($_POST['create_user'])) {
+if(isset($_POST['edit_user'])) {
 
     $userFirstname = $_POST['user_firstname'];
     $userLastname = $_POST['user_lastname'];
@@ -30,13 +30,17 @@ if(isset($_POST['create_user'])) {
     
 //     move_uploaded_file($postImageTemp, "../images/$postImage");
 
-    $query = "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password) ";
+    $query = "UPDATE users SET ";
+    $query .= "user_firstname = '{$userFirstname}', ";
+    $query .= "user_lastname = '{$userLastname}', ";
+    $query .= "user_role = '{$userRole}', ";
+    $query .= "username = '{$username}', ";
+    $query .= "user_email = '{$userEmail}', ";
+    $query .= "user_password = '{$userPassword}' ";
+    $query .= "WHERE user_id = {$userId} ";
 
-    $query .= "VALUES('{$userFirstname}','{$userLastname}','{$userRole}','{$username}','{$userEmail}','{$userPassword}' ) ";
-
-    $createUserQuery = mysqli_query($connection, $query);
-
-    confirmQuery($createUserQuery);
+    $editUserQuery = mysqli_query($connection, $query);
+    confirmQuery($editUserQuery);
 }
 
 
@@ -60,9 +64,9 @@ if(isset($_POST['create_user'])) {
             <option value="subscriber"><?php echo $userRole; ?></options>
             <?php
             if ($userRole == 'admin') {
-                echo "<option value='subsriber'>Subscriber</option>";
+                echo "<option value='Subsriber'>Subscriber</option>";
             } else {
-            echo "<option value='admin'>admin</option>";
+            echo "<option value='Admin'>Admin</option>";
             }
             ?>
 
