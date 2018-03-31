@@ -55,6 +55,8 @@ if (isset($_POST['update_post'])) {
 
     confirmQuery($updatePost);
 
+    echo "<p class='bg-success'>Post Updated. <a href='../post.php?p_id={$postId}'>View Posts</a> or <a href='posts.php'>Edit More Posts</a></p>";
+
 }
 ?>
 
