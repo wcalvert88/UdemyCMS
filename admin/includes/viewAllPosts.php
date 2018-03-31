@@ -14,9 +14,10 @@
         <input type="submit" name="submit" class="btn btn-success" value="Apply">
         <a class="btn btn-primary" href="add_post.php">Add New</a>
     </div>
-    
+
     <thead>
         <tr>
+            <th><input id="selectAllBoxes" type="checkbox"></th>
             <th>Id</th>
             <th>Author</th>
             <th>Title</th>
@@ -45,6 +46,12 @@
             $postCommentCount = $row['post_comment_count'];
             $postDate = $row['post_date'];
             echo "<tr>";
+
+            ?>
+
+                <td><input class='checkBoxes' type='checkbox' name='checkBoxArray[]' value='<?php echo $postId; ?>'></td>
+
+            <?php
             echo "<td>{$postId}</td>";
             echo "<td>{$postAuthor}</td>";
             echo "<td>{$postTitle}</td>";
