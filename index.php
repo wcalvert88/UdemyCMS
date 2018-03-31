@@ -29,7 +29,7 @@ include "includes/navigation.php";
                     $postContent = substr($row['post_content'], 0, 100);
                     $postStatus = $row['post_status'];
 
-                    if ($postStatus == 'published') {
+                    if ($postStatus == 'Published') {
                     
                     ?>
 
