@@ -45,7 +45,7 @@
         <br />
         <select name="user_role" id="">
             <option value="subscriber">Select Options</options>
-            <option value="admin">Admin</option>
+            <option value="Admin">Admin</option>
             <option value="subsriber">Subscriber</option>
 
         </select>
