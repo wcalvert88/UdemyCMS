@@ -143,6 +143,10 @@ include "includes/adminHeader.php";
         <!-- /.row -->
 
     <?php 
+    $query = "SELECT * FROM posts WHERE post_status = 'published' ";
+    $selectAllPublishedPosts = mysqli_query($connection, $query);
+    $postPublishedCounts = mysqli_num_rows($selectAllPublishedPosts);
+
     $query = "SELECT * FROM posts WHERE post_status = 'draft' ";
     $selectAllDraftPosts = mysqli_query($connection, $query);
     $postDraftCounts = mysqli_num_rows($selectAllDraftPosts);
@@ -169,8 +173,8 @@ include "includes/adminHeader.php";
 
             <?php 
             
-            $elementText = ['Active Posts', 'Draft Posts','Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
-            $elementCount = [$postCounts,$postDraftCounts, $commentCounts, $commentUnapproveCounts, $userCounts, $userRoleCounts, $categoryCounts];
+            $elementText = ['All Posts', 'Active Posts', 'Draft Posts','Comments', 'Pending Comments', 'Users', 'Subscribers', 'Categories'];
+            $elementCount = [$postCounts, $postPublishedCounts, $postDraftCounts, $commentCounts, $commentUnapproveCounts, $userCounts, $userRoleCounts, $categoryCounts];
 
             for ($i = 0; $i < count($elementText); $i++) {
                 echo "['{$elementText[$i]}'" . "," . "{$elementCount[$i]}],";

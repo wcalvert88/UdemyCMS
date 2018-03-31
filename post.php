@@ -105,7 +105,7 @@ include "includes/navigation.php";
 
                         <div class="form-group">
                             <label for="comment">Your Commment</label>
-                            <textarea name="comment_content" class="form-control" rows="3"></textarea>
+                            <textarea name="comment_content" class="form-control" rows="3" id="body"></textarea>
                         </div>
                         <button type="submit" class="btn btn-primary" name="create_comment">Submit</button>
                     </form>

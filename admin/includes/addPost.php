@@ -61,8 +61,11 @@
     </div>
 
     <div class="form-group">
-        <label for="post_status">Post Status</label>
-        <input type="text" class="form-control" name="post_status">
+        <label for="post_status">Post Status</label><br />
+        <select name="post_status" id="">
+            <option value='Draft'>Draft</option>
+            <option value='Published'>Published</option>
+        </select>
     </div>
 
     <div class="form-group">
@@ -77,7 +80,7 @@
 
     <div class="form-group">
         <label for="post_content">Post Content</label>
-        <textarea class="form-control" name="post_content" id="" cols="30" rows="10">
+        <textarea class="form-control" name="post_content" id="body" cols="30" rows="10">
         </textarea>
     </div>
 
