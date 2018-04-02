@@ -20,6 +20,14 @@ if (isset($_POST['submit'])) {
         die("Query Failed" . mysqli_error($connection));
     }
 
+
+    while ($row = mysqli_fetch_array($selectRandSaltQuery)) {
+
+        echo $salt = $row['randSalt'];
+
+
+    }
+
 }
 
 
