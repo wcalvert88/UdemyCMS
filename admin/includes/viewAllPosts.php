@@ -1,8 +1,29 @@
 <?php
 if (isset($_POST['checkBoxArray'])){
-    foreach($_POST['checkBoxArray'] as $checkBoxValue) {
-        echo $checkBoxValue;
+    foreach($_POST['checkBoxArray'] as $postValueId) {
+        $bulkOptions = $_POST['bulkOptions'];
 
+        switch ($bulkOptions) {
+            case 'Published':
+                $query = "UPDATE posts SET post_status = '{$bulkOptions}' WHERE post_id = '{$postValueId}'";
+                $updateToPublishedStatus = mysqli_query($connection, $query);
+                confirmQuery($updateToPublishedStatus);
+                break;
+            case 'Draft':
+                $query = "UPDATE posts SET post_status = '{$bulkOptions}' WHERE post_id = '{$postValueId}'";
+                $updateToDraftStatus = mysqli_query($connection, $query);
+                confirmQuery($updateToDraftStatus);
+                break;
+
+            case 'Delete':
+                $query = "DELETE FROM posts WHERE post_id = '{$postValueId}'";
+                $updateToDeleteStatus = mysqli_query($connection, $query);
+                confirmQuery($updateToDeleteStatus);
+                break;
+            default:
+                # code...
+                break;
+        }
 
     }
 }
@@ -10,21 +31,22 @@ if (isset($_POST['checkBoxArray'])){
 ?>
 <form action="" method= "post">
 <table class="table table-bordered table-hover">
-    <div id="bulkOptionsContainer" class="col-xs-4">
+    <div class="row">
+        <div id="bulkOptionsContainer" class="col-xs-4">
         <select class="form-control" name="bulkOptions" id="">
             <option value="">Select Options</option>
-            <option value="">Publish</option>
-            <option value="">Draft</option>
-            <option value="">Delete</option>
+            <option value="Published">Publish</option>
+            <option value="Draft">Draft</option>
+            <option value="Delete">Delete</option>
         
         </select>
-    
-    </div>
-    <div class="col-xs-4">
-        <input type="submit" name="submit" class="btn btn-success" value="Apply">
-        <a class="btn btn-primary" href="add_post.php">Add New</a>
-    </div>
-
+        </div>
+        
+        <div class="col-xs-4" style="padding: 0px;">
+            <input type="submit" name="submit" class="btn btn-success" value="Apply">
+            <a class="btn btn-primary" href="add_post.php">Add New</a>
+        </div>
+    </div>    
     <thead>
         <tr>
             <th><input id="selectAllBoxes" type="checkbox"></th>
