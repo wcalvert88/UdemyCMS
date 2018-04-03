@@ -25,6 +25,8 @@ while ($row = mysqli_fetch_array($selectUserQuery)) {
 }
 
 $password =crypt($password, $dbUserPassword);
+
+
 if ($username === $dbUsername && $password === $dbUserPassword) {
     $_SESSION['username'] = $dbUsername;
     $_SESSION['firstname'] = $dbFirstname;
