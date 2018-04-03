@@ -21,6 +21,9 @@ include "includes/navigation.php";
                 $postQueryCount = "SELECT * FROM posts";
                 $findCount = mysqli_query($connection, $postQueryCount);
                 $count = mysqli_num_rows($findCount);
+                $count = ceil($count / 5);
+
+
 
                 $query = "SELECT * FROM posts";
                 $selectAllPostsQuery = mysqli_query($connection, $query);
@@ -37,10 +40,7 @@ include "includes/navigation.php";
                     
                     ?>
 
-                    <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
-                    </h1>
+                    
 
                     <!-- First Blog Post -->
                     <h2>
@@ -55,7 +55,7 @@ include "includes/navigation.php";
                     <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt=""></a>
                     <hr>
                     <p><?php echo $postContent ?></p>
-                    <a class="btn btn-primary" href="post.php?p_id=<?php echo $postId; ?>"">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                    <a class="btn btn-primary" href="post.php?p_id=<?php echo $postId; ?>"">Read More <span class='glyphicon glyphicon-chevron-right'"></span></a>
                         
                     <hr>
                 <?php
@@ -72,7 +72,20 @@ include "includes/navigation.php";
         <!-- /.row -->
 
         <hr>
+        
+        <ul class="pager">
+        <?php 
+        for ($i = 1; $i <= $count; $i++) {
 
+            echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+        }
+        
+        
+        ?>
+    
+    
+    
+        </ul>
 <?php 
 include "includes/footer.php";
 ?>
