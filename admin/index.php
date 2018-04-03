@@ -1,7 +1,21 @@
 <?php 
 include "includes/adminHeader.php";
 ?>
+<?php 
+$session = session_id();
+$time = time();
+$timeOutInSeconds = 60;
+$timeOut = $time - $timeOutInSeconds;
 
+$query = "SELECT * FROM users_online WHERE session = '{$session}'";
+$sendQuery = mysqli_query($connection, $query);
+$count = mysqli_num_rows($sendQuery);
+
+if ($count == NULL) {
+    mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES('{$session}', '{$time}') ");
+}
+
+?>
 <div id="wrapper">
 
 <!-- Navigation -->
