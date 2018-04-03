@@ -19,7 +19,13 @@ include "includes/navigation.php";
                 <?php 
                 if(isset($_GET['p_id'])) {
                     $postId = $_GET['p_id'];
-                }
+                
+                    $viewQuery = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = {$postId} ";
+                    $sendQuery = mysqli_query($connection, $viewQuery);
+
+                    if (!$sendQuery) {
+                        die("QUERY FAILED" . mysqli_error($connection));
+                    }
 
 
 
@@ -54,6 +60,12 @@ include "includes/navigation.php";
                     <hr>
                 <?php
                 }
+            
+            
+            
+            } else {
+                header("Location: index.php");
+            }
                 ?>
                 
 

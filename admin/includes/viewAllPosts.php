@@ -82,6 +82,7 @@ if (isset($_POST['checkBoxArray'])){
             <th>View Post</th>
             <th>Edit</th>
             <th>Delete</th>
+            <th>Views</th>
         </tr>
     </thead>
     <tbody>
@@ -98,6 +99,7 @@ if (isset($_POST['checkBoxArray'])){
             $postTags = $row['post_tags'];
             $postCommentCount = $row['post_comment_count'];
             $postDate = $row['post_date'];
+            $postViewsCount = $row['post_views_count'];
             echo "<tr>";
 
             ?>
@@ -130,6 +132,7 @@ if (isset($_POST['checkBoxArray'])){
             echo "<td><a href='../post.php?p_id={$postId}'>View Post</td>";
             echo "<td><a href='posts.php?source=edit_post&p_id={$postId}'>Edit</td>";
             echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?'); \"href='posts.php?delete={$postId}'>Delete</td>";
+            echo "<td>{$postViewsCount}</td>";
             echo "</tr>";
         }
         ?>

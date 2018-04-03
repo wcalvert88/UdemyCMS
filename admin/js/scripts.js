@@ -17,9 +17,11 @@ $(document).ready(function() {
             })
         }
     });
-    var divBox = "<div id='load-screen'><div id='loading'></div></div>";
-    $("body").prepend(divBox);
-    $('#load-screen').delay(700).fadeOut(600, function() {
-        $(this).remove();
-    });
+
+    // This adds a loading screen feature I don't like how it works so it's commented out for reference.
+    // var divBox = "<div id='load-screen'><div id='loading'></div></div>";
+    // $("body").prepend(divBox);
+    // $('#load-screen').delay(700).fadeOut(600, function() {
+    //     $(this).remove();
+    // });
 });
