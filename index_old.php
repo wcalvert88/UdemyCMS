@@ -18,11 +18,7 @@ include "includes/navigation.php";
             <div class="col-md-8">
                 <?php 
                 
-                $postQueryCount = "SELECT * FROM posts";
-                $findCount = mysqli_query($connection, $postQueryCount);
-                $count = mysqli_num_rows($findCount);
-
-                $query = "SELECT * FROM posts";
+                $query = "SELECT * FROM posts ";
                 $selectAllPostsQuery = mysqli_query($connection, $query);
                 while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
                     $postId = $row['post_id'];
