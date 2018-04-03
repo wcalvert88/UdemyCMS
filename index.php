@@ -18,6 +18,18 @@ include "includes/navigation.php";
             <div class="col-md-8">
                 <?php 
                 
+                if(isset($_GET['page'])) {
+                    $page = $_GET['page'];
+                } else {
+                    $page = "";
+                }
+
+                if ($page == "" || $page == 1) {
+                    $page1 = 0;
+                } else {
+                    $page1 = ($page * 5) - 5;
+                }
+
                 $postQueryCount = "SELECT * FROM posts";
                 $findCount = mysqli_query($connection, $postQueryCount);
                 $count = mysqli_num_rows($findCount);
@@ -25,7 +37,7 @@ include "includes/navigation.php";
 
 
 
-                $query = "SELECT * FROM posts";
+                $query = "SELECT * FROM posts LIMIT {$page1},5";
                 $selectAllPostsQuery = mysqli_query($connection, $query);
                 while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
                     $postId = $row['post_id'];
@@ -76,7 +88,7 @@ include "includes/navigation.php";
         <ul class="pager">
         <?php 
         for ($i = 1; $i <= $count; $i++) {
-
+            
             echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
         }
         
