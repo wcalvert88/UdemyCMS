@@ -20,8 +20,28 @@ if (isset($_POST['checkBoxArray'])){
                 $updateToDeleteStatus = mysqli_query($connection, $query);
                 confirmQuery($updateToDeleteStatus);
                 break;
-            default:
-                # code...
+            
+            case 'Clone':
+                $query = "SELECT * FROM posts WHERE post_id = '{$postValueId}' ";
+                $selectPostQuery = mysqli_query($connection, $query);
+
+                while ($row = mysqli_fetch_array($selectPostQuery)) {
+                    $postTitle = $row['post_title'];
+                    $postCategoryId = $row['post_category_id'];
+                    $postDate = $row['post_date'];
+                    $postAuthor = $row['post_author'];
+                    $postStatus = $row['post_status'];
+                    $postImage = $row['post_image'];
+                    $postTags = $row['post_tags'];
+                    $postContent = $row['post_content'];
+                }
+                $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
+                $query .= "VALUES({$postCategoryId}, '{$postTitle}', '{$postAuthor}', '{$postDate}', '{$postImage}', '{$postContent}', '{$postTags}','{$postStatus}') ";
+
+                $copyQuery = mysqli_query($connection, $query);
+                if(!$copyQuery) {
+                    die("QUERY FAILED" . mysqli_error($connection));
+                }
                 break;
         }
 
@@ -38,7 +58,7 @@ if (isset($_POST['checkBoxArray'])){
             <option value="Published">Publish</option>
             <option value="Draft">Draft</option>
             <option value="Delete">Delete</option>
-        
+            <option value="Clone">Clone</option>
         </select>
         </div>
         
@@ -66,7 +86,7 @@ if (isset($_POST['checkBoxArray'])){
     </thead>
     <tbody>
         <?php 
-        $query = "SELECT * FROM posts";
+        $query = "SELECT * FROM posts ORDER BY post_id DESC ";
         $selectPosts = mysqli_query($connection, $query);
         while($row = mysqli_fetch_assoc($selectPosts)) {
             $postId = $row['post_id'];
