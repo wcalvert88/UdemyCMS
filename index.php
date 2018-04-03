@@ -32,7 +32,7 @@ include "includes/navigation.php";
                     $page1 = ($page * $perPage) - $perPage;
                 }
 
-                $postQueryCount = "SELECT * FROM posts";
+                $postQueryCount = "SELECT * FROM posts WHERE post_status = 'Published'";
                 $findCount = mysqli_query($connection, $postQueryCount);
                 $count = mysqli_num_rows($findCount);
                 $count = ceil($count / $perPage);
