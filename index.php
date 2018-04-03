@@ -91,7 +91,14 @@ include "includes/navigation.php";
         <?php 
         for ($i = 1; $i <= $count; $i++) {
             
+            if($i == $page) {
+
+                echo "<li><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
+            } else {
+
+
             echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+            }
         }
         
         
