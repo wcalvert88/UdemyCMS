@@ -2,7 +2,7 @@
 if (isset($_GET['edit_user'])) {
     $userId = $_GET['edit_user'];
 
-$query = "SELECT * FROM users WHERE user_id = {$userId}";
+    $query = "SELECT * FROM users WHERE user_id = {$userId}";
     $selectUsersQuery = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($selectUsersQuery)) {
         $userId = $row['user_id'];
@@ -14,49 +14,49 @@ $query = "SELECT * FROM users WHERE user_id = {$userId}";
         $userImage = $row['user_image'];
         $userRole = $row['user_role'];
     }
-}
-if(isset($_POST['edit_user'])) {
 
-    $userFirstname = $_POST['user_firstname'];
-    $userLastname = $_POST['user_lastname'];
-    $userRole = $_POST['user_role'];
+    if(isset($_POST['edit_user'])) {
 
-    // $postImage = $_FILES['image']['name'];
-    // $postImageTemp = $_FILES['image']['tmp_name'];
-    $username = $_POST['username'];
-    $userEmail = $_POST['user_email'];
-    $userPassword = $_POST['user_password'];
-    $postDate = date('d-m-y');
+        $userFirstname = $_POST['user_firstname'];
+        $userLastname = $_POST['user_lastname'];
+        $userRole = $_POST['user_role'];
+        $username = $_POST['username'];
+        $userEmail = $_POST['user_email'];
+        $userPassword = $_POST['user_password'];
+        $postDate = date('d-m-y');
+
+
+        if(!empty($userPassword)) {
+            $queryPassword = "SELECT user_password FROM users WHERE user_id = {$userId}";
+            $getUserQuery = mysqli_query($connection, $queryPassword);
+            confirmQuery($getUserQuery);
+
+            $row = mysqli_fetch_array($getUserQuery);
+            $dbUserPassword = $row['user_password'];
+        }
+
+        if($dbUserPassword != $userPassword) {
+            $hashedPassword = password_hash($userPassword, PASSWORD_BCRYPT, array('cost' => 12));
+        }
     
-//     move_uploaded_file($postImageTemp, "../images/$postImage");
 
-    if(!empty($userPassword)) {
-        $queryPassword = "SELECT user_password FROM users WHERE user_id = {$userId}";
-        $getUserQuery = mysqli_query($connection, $query);
-        confirmQuery($getUserQuery);
+        $query = "UPDATE users SET ";
+        $query .= "user_firstname = '{$userFirstname}', ";
+        $query .= "user_lastname = '{$userLastname}', ";
+        $query .= "user_role = '{$userRole}', ";
+        $query .= "username = '{$username}', ";
+        $query .= "user_email = '{$userEmail}', ";
+        $query .= "user_password = '{$hashedPassword}' ";
+        $query .= "WHERE user_id = {$userId} ";
 
-        $row = mysqli_fetch_array($getUserQuery);
-        $dbUserPassword = $row['user_password'];
+        $editUserQuery = mysqli_query($connection, $query);
+        confirmQuery($editUserQuery);
+
+        echo "User Updated" . " <a href='users.php'>View Users?</a>";
     }
+} else {
+    header("Location: index.php");
 
-    if($dbUserPassword != $userPassword) {
-        $hashedPassword = password_hash($userPassword, PASSWORD_BCRYPT, array('cost' => 12));
-    }
- 
-
-    $query = "UPDATE users SET ";
-    $query .= "user_firstname = '{$userFirstname}', ";
-    $query .= "user_lastname = '{$userLastname}', ";
-    $query .= "user_role = '{$userRole}', ";
-    $query .= "username = '{$username}', ";
-    $query .= "user_email = '{$userEmail}', ";
-    $query .= "user_password = '{$hashedPassword}' ";
-    $query .= "WHERE user_id = {$userId} ";
-
-    $editUserQuery = mysqli_query($connection, $query);
-    confirmQuery($editUserQuery);
-
-    echo "User Updated" . " <a href='users.php'>View Users?</a>";
 }
 
 
@@ -88,15 +88,6 @@ if(isset($_POST['edit_user'])) {
 
         </select>
     </div>
-
-
-
-
-
-    <!-- <div class="form-group">
-        <label for="post_image">Post Image</label>
-        <input type="file" name="image">
-    </div> -->
 
     <div class="form-group">
         <label for="username">Username</label>
