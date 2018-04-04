@@ -4,7 +4,7 @@ function usersOnline() {
     global $connection;
     $session = session_id();
     $time = time();
-    $timeOutInSeconds = 60;
+    $timeOutInSeconds = 30;
     $timeOut = $time - $timeOutInSeconds;
 
     $query = "SELECT * FROM users_online WHERE session = '$session'";
