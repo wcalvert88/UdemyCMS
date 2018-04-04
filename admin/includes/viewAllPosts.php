@@ -92,6 +92,7 @@ if (isset($_POST['checkBoxArray'])){
         while($row = mysqli_fetch_assoc($selectPosts)) {
             $postId = $row['post_id'];
             $postAuthor = $row['post_author'];
+            $postUser = $row['post_user'];
             $postTitle = $row['post_title'];
             $postCategoryId = $row['post_category_id'];
             $postStatus = $row['post_status'];
@@ -108,7 +109,19 @@ if (isset($_POST['checkBoxArray'])){
 
             <?php
             echo "<td>{$postId}</td>";
-            echo "<td>{$postAuthor}</td>";
+
+            if(isset($postAuthor) || !empty($postAuthor)) {
+                
+                echo "<td>{$postAuthor}</td>";
+
+            } elseif (isset($postUser) || !empty($postUser)){
+                echo "<td>{$postUser}</td>";
+
+            } else {
+                echo "<td>Something to add in the next video</td>";
+            }
+            
+            
             echo "<td>{$postTitle}</td>";
 
 

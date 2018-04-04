@@ -2,7 +2,7 @@
 
     if(isset($_POST['create_post'])) {
         $postTitle = $_POST['title'];
-        $postAuthor = $_POST['author'];
+        $postUser = $_POST['post_user'];
         $postCategoryId = $_POST['post_category'];
         $postStatus = $_POST['post_status'];
 
@@ -15,9 +15,9 @@
         
         move_uploaded_file($postImageTemp, "../images/$postImage");
 
-        $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
+        $query = "INSERT INTO posts(post_category_id, post_title, post_user, post_date, post_image, post_content, post_tags, post_status) ";
 
-        $query .= "VALUES({$postCategoryId},'{$postTitle}','{$postAuthor}',now(),'{$postImage}','{$postContent}','{$postTags}','{$postStatus}' ) ";
+        $query .= "VALUES({$postCategoryId},'{$postTitle}','{$postUser}',now(),'{$postImage}','{$postContent}','{$postTags}','{$postStatus}' ) ";
 
         $createPostQuery = mysqli_query($connection, $query);
 
@@ -60,7 +60,7 @@
     <div class="form-group">
         <label for="users">Users</label>
         <br />
-        <select name="post_category" id="">
+        <select name="post_user" id="">
         <?php 
         
         $query = "SELECT * FROM users";
