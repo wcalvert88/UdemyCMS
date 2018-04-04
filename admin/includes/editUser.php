@@ -26,20 +26,23 @@ if(isset($_POST['edit_user'])) {
     $username = $_POST['username'];
     $userEmail = $_POST['user_email'];
     $userPassword = $_POST['user_password'];
-    // $postDate = date('d-m-y');
+    $postDate = date('d-m-y');
     
 //     move_uploaded_file($postImageTemp, "../images/$postImage");
 
-    $query = "SELECT randSalt FROM users";
-    $selectRandSaltQuery = mysqli_query($connection, $query);
+    if(!empty($userPassword)) {
+        $queryPassword = "SELECT user_password FROM users WHERE user_id = {$userId}";
+        $getUserQuery = mysqli_query($connection, $query);
+        confirmQuery($getUserQuery);
 
-    if (!$selectRandSaltQuery) {
-        die("Query Failed" . mysqli_error($connection));
+        $row = mysqli_fetch_array($getUserQuery);
+        $dbUserPassword = $row['user_password'];
     }
-    $row = mysqli_fetch_array($selectRandSaltQuery);
-    $salt = $row['randSalt'];
 
-    $hashedPassword =crypt($userPassword, $salt);
+    if($dbUserPassword != $userPassword) {
+        $hashedPassword = password_hash($userPassword, PASSWORD_BCRYPT, array('cost' => 12));
+    }
+ 
 
     $query = "UPDATE users SET ";
     $query .= "user_firstname = '{$userFirstname}', ";
@@ -52,6 +55,8 @@ if(isset($_POST['edit_user'])) {
 
     $editUserQuery = mysqli_query($connection, $query);
     confirmQuery($editUserQuery);
+
+    echo "User Updated" . " <a href='users.php'>View Users?</a>";
 }
 
 
