@@ -1,30 +1,36 @@
 <?php 
+if(isset($_POST['create_user'])) {
 
-    if(isset($_POST['create_user'])) {
+    $userFirstname = $_POST['user_firstname'];
+    $userFirstname = mysqli_real_escape_string($connection, $userFirstname);
+    $userLastname = $_POST['user_lastname'];
+    $userLastname = mysqli_real_escape_string($connection, $userLastname);
+    $userRole = $_POST['user_role'];
+    $userRole = mysqli_real_escape_string($connection, $userRole);
+    // $postImage = $_FILES['image']['name'];
+    // $postImageTemp = $_FILES['image']['tmp_name'];
+    $username = $_POST['username'];
+    $username = mysqli_real_escape_string($connection, $username);
+    $userEmail = $_POST['user_email'];
+    $userEmail = mysqli_real_escape_string($connection, $userEmail);
+    $userPassword = $_POST['user_password'];
+    $userPassword = mysqli_real_escape_string($connection, $userPassword);
 
-        $userFirstname = $_POST['user_firstname'];
-        $userLastname = $_POST['user_lastname'];
-        $userRole = $_POST['user_role'];
+    $userPassword = password_hash($userPassword, PASSWORD_BCRYPT, array('cost' => 10));
+    // $postDate = date('d-m-y');
+    
+//     move_uploaded_file($postImageTemp, "../images/$postImage");
 
-        // $postImage = $_FILES['image']['name'];
-        // $postImageTemp = $_FILES['image']['tmp_name'];
-        $username = $_POST['username'];
-        $userEmail = $_POST['user_email'];
-        $userPassword = $_POST['user_password'];
-        // $postDate = date('d-m-y');
-        
-    //     move_uploaded_file($postImageTemp, "../images/$postImage");
+    $query = "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password) ";
 
-        $query = "INSERT INTO users(user_firstname, user_lastname, user_role, username, user_email, user_password) ";
+    $query .= "VALUES('{$userFirstname}','{$userLastname}','{$userRole}','{$username}','{$userEmail}','{$userPassword}' ) ";
 
-        $query .= "VALUES('{$userFirstname}','{$userLastname}','{$userRole}','{$username}','{$userEmail}','{$userPassword}' ) ";
+    $createUserQuery = mysqli_query($connection, $query);
 
-        $createUserQuery = mysqli_query($connection, $query);
+    confirmQuery($createUserQuery);
 
-        confirmQuery($createUserQuery);
-
-        echo "User Created: " . "<a href='users.php'>View Users</a> " ;
-    }
+    echo "User Created: " . "<a href='users.php'>View Users</a> " ;
+}
 
 
 ?>
