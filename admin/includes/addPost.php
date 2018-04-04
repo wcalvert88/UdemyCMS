@@ -70,7 +70,7 @@
             $userId = $row['user_id'];
             $username = $row['username'];
 
-            echo "<option value='$userId'>{$username}</option>";
+            echo "<option value='$username'>{$username}</option>";
         
         }
         

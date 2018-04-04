@@ -110,15 +110,13 @@ if (isset($_POST['checkBoxArray'])){
             <?php
             echo "<td>{$postId}</td>";
 
-            if(isset($postAuthor) || !empty($postAuthor)) {
+            if(!empty($postAuthor)) {
                 
                 echo "<td>{$postAuthor}</td>";
 
-            } elseif (isset($postUser) || !empty($postUser)){
+            } elseif (!empty($postUser)){
                 echo "<td>{$postUser}</td>";
 
-            } else {
-                echo "<td>Something to add in the next video</td>";
             }
             
             
