@@ -78,9 +78,9 @@ include "includes/adminHeader.php";
 
             echo "<td><a href='../post.php?p_id={$postId}'>$postTitle</a></td>";
             echo "<td>{$commentDate}</td>";
-            echo "<td><a href='comments.php?approve={$commentId}'>Approve</td>";
-            echo "<td><a href='comments.php?unapprove={$commentId}'>Unapprove</td>";
-            echo "<td><a href='comments.php?delete={$commentId}'>Delete</td>";
+            echo "<td><a href='postComments.php?approve={$commentId}&id=" . $_GET['id'] . "'>Approve</td>";
+            echo "<td><a href='postComments.php?unapprove={$commentId}&id=" . $_GET['id'] . "'>Unapprove</td>";
+            echo "<td><a href='postComments.php?delete={$commentId}&id=" . $_GET['id'] . "'>Delete</td>";
             echo "</tr>";
         }
         ?>
@@ -93,7 +93,7 @@ if(isset($_GET['delete'])){
     $query = "DELETE FROM comments WHERE comment_id = {$theCommentId} ";
     $deleteQuery = mysqli_query($connection, $query);
 
-    header("Location: comments.php");
+    header("Location: postComments.php?id=" . $_GET['id']);
 
 }
 
@@ -106,7 +106,7 @@ $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {
     } else {
         echo "UNAPPROVED";
     }
-    header("Location: comments.php");
+    header("Location: postComments.php?id=" . $_GET['id']);
 
 }
 
@@ -114,7 +114,7 @@ if(isset($_GET['approve'])){
     $theCommentId = $_GET['approve'];
     $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = {$theCommentId}";
     $approveQuery = mysqli_query($connection, $query);
-    header("Location: comments.php");
+    header("Location: postComments.php?id=" . $_GET['id']);
 
 }
 
