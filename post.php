@@ -80,7 +80,7 @@ include "includes/navigation.php";
                     $commentEmail = $_POST['comment_email'];
                     $commentContent = $_POST['comment_content'];
 
-                    if(!empty($commentAuthor) && !empty($commentEmail) && !empty($commentContent)) {
+                    if(!empty($commentAuthor) && !empty($commentEmail) && !empty($commentContent) && $commentContent != '') {
 
                     
                         $query = "INSERT INTO comments (comment_post_id, comment_author, comment_email, comment_content, comment_status, comment_date) ";

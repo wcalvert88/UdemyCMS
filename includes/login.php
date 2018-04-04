@@ -24,10 +24,10 @@ while ($row = mysqli_fetch_array($selectUserQuery)) {
     $dbUserRole = $row['user_role'];
 }
 
-$password =crypt($password, $dbUserPassword);
+// $password =crypt($password, $dbUserPassword);
 
 
-if ($username === $dbUsername && $password === $dbUserPassword) {
+if (password_verify($password, $dbUserPassword)) {
     $_SESSION['username'] = $dbUsername;
     $_SESSION['firstname'] = $dbFirstname;
     $_SESSION['lastname'] = $dbLastname;
