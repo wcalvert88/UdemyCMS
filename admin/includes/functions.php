@@ -1,5 +1,27 @@
 <?php 
 
+function usersOnline() {
+    global $connection;
+    $session = session_id();
+    $time = time();
+    $timeOutInSeconds = 60;
+    $timeOut = $time - $timeOutInSeconds;
+
+    $query = "SELECT * FROM users_online WHERE session = '$session'";
+    $sendQuery = mysqli_query($connection, $query);
+    $count = mysqli_num_rows($sendQuery);
+
+    if ($count == NULL) {
+        mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES('$session', '$time') ");
+    } else {    
+        mysqli_query($connection, "UPDATE users_online SET time = '{$time}' WHERE session = '$session'");
+    }
+
+    $usersOnlineQuery = mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$timeOut'");
+    return $countUser = mysqli_num_rows($usersOnlineQuery);
+
+}
+
 function confirmQuery($result){
     global $connection;
     if (!$result) {
