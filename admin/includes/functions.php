@@ -1,26 +1,32 @@
 <?php 
 
 function usersOnline() {
-    global $connection;
-    $session = session_id();
-    $time = time();
-    $timeOutInSeconds = 30;
-    $timeOut = $time - $timeOutInSeconds;
+    if (isset($_GET['onlineusers'])) {
+        global $connection;
+        if(!$connection) {
+            session_start();
+            include("../../includes/db.php");
+            $session = session_id();
+            $time = time();
+            $timeOutInSeconds = 5;
+            $timeOut = $time - $timeOutInSeconds;
 
-    $query = "SELECT * FROM users_online WHERE session = '$session'";
-    $sendQuery = mysqli_query($connection, $query);
-    $count = mysqli_num_rows($sendQuery);
+            $query = "SELECT * FROM users_online WHERE session = '$session'";
+            $sendQuery = mysqli_query($connection, $query);
+            $count = mysqli_num_rows($sendQuery);
 
-    if ($count == NULL) {
-        mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES('$session', '$time') ");
-    } else {    
-        mysqli_query($connection, "UPDATE users_online SET time = '{$time}' WHERE session = '$session'");
+            if ($count == NULL) {
+                mysqli_query($connection, "INSERT INTO users_online(session, time) VALUES('$session', '$time') ");
+            } else {    
+                mysqli_query($connection, "UPDATE users_online SET time = '{$time}' WHERE session = '$session'");
+            }
+
+            $usersOnlineQuery = mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$timeOut'");
+            echo $countUser = mysqli_num_rows($usersOnlineQuery);
+        }
     }
-
-    $usersOnlineQuery = mysqli_query($connection, "SELECT * FROM users_online WHERE time > '$timeOut'");
-    return $countUser = mysqli_num_rows($usersOnlineQuery);
-
 }
+usersOnline();
 
 function confirmQuery($result){
     global $connection;
