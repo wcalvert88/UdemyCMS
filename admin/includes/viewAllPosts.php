@@ -134,7 +134,7 @@ if (isset($_POST['checkBoxArray'])){
             $row = mysqli_fetch_array($sendCommentQuery);
             $commentId = $row['comment_id'];
             $countComments = mysqli_num_rows($sendCommentQuery);
-            echo "<td><a href='comment.php?id=$commentId'>$countComments</a></td>";
+            echo "<td><a href='postComments.php?id=$postId'>$countComments</a></td>";
             
             
             
