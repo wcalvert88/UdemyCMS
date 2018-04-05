@@ -42,13 +42,13 @@ include "includes/navigation.php";
                 $query = "SELECT * FROM posts WHERE post_status = 'Published' LIMIT {$page1},$perPage";
                 $selectAllPostsQuery = mysqli_query($connection, $query);
                 while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
-                    $postId = $row['post_id'];
-                    $postTitle = $row['post_title'];
-                    $postAuthor = $row['post_user'] ?: $row['post_author'];
-                    $postDate = $row['post_date'];
-                    $postImage = $row['post_image'];
-                    $postContent = substr($row['post_content'], 0, 100);
-                    $postStatus = $row['post_status'];
+                    $postId = escape($row['post_id']);
+                    $postTitle = escape($row['post_title']);
+                    $postAuthor = escape($row['post_user']) ?: escape($row['post_author']);
+                    $postDate = escape($row['post_date']);
+                    $postImage = escape($row['post_image']);
+                    $postContent = escape(substr($row['post_content'], 0, 100));
+                    $postStatus = escape($row['post_status']);
 
                     if ($postStatus == 'Published') {
                     

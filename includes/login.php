@@ -17,12 +17,12 @@ if (!$selectUserQuery) {
     die ("QUERY FAILED" . mysqli_error($connection));
 }
 while ($row = mysqli_fetch_array($selectUserQuery)) {
-    $dbUserId = $row['user_id'];
-    $dbUsername = $row['username'];
-    $dbUserPassword = $row['user_password'];
-    $dbUserFirstname = $row['user_firstname'];
-    $dbUserLastname = $row['user_lastname'];
-    $dbUserRole = $row['user_role'];
+    $dbUserId = escape($row['user_id']);
+    $dbUsername = escape($row['username']);
+    $dbUserPassword = escape($row['user_password']);
+    $dbUserFirstname = escape($row['user_firstname']);
+    $dbUserLastname = escape($row['user_lastname']);
+    $dbUserRole = escape($row['user_role']);
 }
 
 // $password =crypt($password, $dbUserPassword);

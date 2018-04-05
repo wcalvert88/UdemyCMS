@@ -1,28 +1,28 @@
 <?php 
 if (isset($_GET['edit_user'])) {
-    $userId = $_GET['edit_user'];
+    $userId = escape($_GET['edit_user']);
 
     $query = "SELECT * FROM users WHERE user_id = {$userId}";
     $selectUsersQuery = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($selectUsersQuery)) {
-        $userId = $row['user_id'];
-        $username = $row['username'];
-        $userPassword = $row['user_password'];
-        $userFirstname = $row['user_firstname'];
-        $userLastname = $row['user_lastname'];
-        $userEmail = $row['user_email'];
-        $userImage = $row['user_image'];
-        $userRole = $row['user_role'];
+        $userId = escape($row['user_id']);
+        $username = escape($row['username']);
+        $userPassword = escape($row['user_password']);
+        $userFirstname = escape($row['user_firstname']);
+        $userLastname = escape($row['user_lastname']);
+        $userEmail = escape($row['user_email']);
+        $userImage = escape($row['user_image']);
+        $userRole = escape($row['user_role']);
     }
 
     if(isset($_POST['edit_user'])) {
 
-        $userFirstname = $_POST['user_firstname'];
-        $userLastname = $_POST['user_lastname'];
-        $userRole = $_POST['user_role'];
-        $username = $_POST['username'];
-        $userEmail = $_POST['user_email'];
-        $userPassword = $_POST['user_password'];
+        $userFirstname = escape($_POST['user_firstname']);
+        $userLastname = escape($_POST['user_lastname']);
+        $userRole = escape($_POST['user_role']);
+        $username = escape($_POST['username']);
+        $userEmail = escape($_POST['user_email']);
+        $userPassword = escape($_POST['user_password']);
         $postDate = date('d-m-y');
 
 
@@ -32,7 +32,7 @@ if (isset($_GET['edit_user'])) {
             confirmQuery($getUserQuery);
 
             $row = mysqli_fetch_array($getUserQuery);
-            $dbUserPassword = $row['user_password'];
+            $dbUserPassword = escape($row['user_password']);
         }
 
         if($dbUserPassword != $userPassword) {

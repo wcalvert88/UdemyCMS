@@ -35,13 +35,13 @@ include "includes/adminHeader.php";
         $query = "SELECT * FROM comments WHERE comment_post_id =" . escape($_GET['id']) . " ";
         $selectComments = mysqli_query($connection, $query);
         while($row = mysqli_fetch_assoc($selectComments)) {
-            $commentId = $row['comment_id'];
-            $commentPostId = $row['comment_post_id'];
-            $commentAuthor = $row['comment_author'];
-            $commentContent = $row['comment_content'];
-            $commentEmail = $row['comment_email'];
-            $commentStatus = $row['comment_status'];
-            $commentDate = $row['comment_date'];
+            $commentId = escape($row['comment_id']);
+            $commentPostId = escape($row['comment_post_id']);
+            $commentAuthor = escape($row['comment_author']);
+            $commentContent = escape($row['comment_content']);
+            $commentEmail = escape($row['comment_email']);
+            $commentStatus = escape($row['comment_status']);
+            $commentDate = escape($row['comment_date']);
 
             echo "<tr>";
             echo "<td>{$commentId}</td>";
@@ -68,8 +68,8 @@ include "includes/adminHeader.php";
             $selectPostIdQuery = mysqli_query($connection, $query);
 
             while ($row = mysqli_fetch_assoc($selectPostIdQuery)) {
-                $postId = $row['post_id'];
-                $postTitle = $row['post_title'];
+                $postId = escape($row['post_id']);
+                $postTitle = escape($row['post_title']);
 
             }
 

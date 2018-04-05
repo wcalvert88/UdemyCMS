@@ -32,11 +32,11 @@ include "includes/navigation.php";
                         echo "<h1> NO RESULT</h1>";
                     } else {
                         while($row = mysqli_fetch_assoc($searchQuery)) {
-                            $postTitle = $row['post_title'];
-                            $postAuthor = $row['post_author'];
-                            $postDate = $row['post_date'];
-                            $postImage = $row['post_image'];
-                            $postContent = $row['post_content'];
+                            $postTitle = escape($row['post_title']);
+                            $postAuthor = escape($row['post_author']);
+                            $postDate = escape($row['post_date']);
+                            $postImage = escape($row['post_image']);
+                            $postContent = escape($row['post_content']);
                             ?>
         
                             <h1 class="page-header">

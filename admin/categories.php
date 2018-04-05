@@ -27,7 +27,7 @@ include "includes/adminHeader.php";
 
             <?php // UPDATE AND INCLUDE QUERY
             if(isset($_GET['edit'])) {
-                $catId = $_GET['edit'];
+                $catId = escape($_GET['edit']);
                 include "includes/adminUpdateCat.php";
             }
             ?>

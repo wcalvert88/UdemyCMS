@@ -1,16 +1,16 @@
 <?php 
 
     if(isset($_POST['create_post'])) {
-        $postTitle = $_POST['title'];
-        $postUser = $_POST['post_user'];
-        $postCategoryId = $_POST['post_category'];
-        $postStatus = $_POST['post_status'];
+        $postTitle = escape($_POST['title']);
+        $postUser = escape($_POST['post_user']);
+        $postCategoryId = escape($_POST['post_category']);
+        $postStatus = escape($_POST['post_status']);
 
-        $postImage = $_FILES['image']['name'];
-        $postImageTemp = $_FILES['image']['tmp_name'];
+        $postImage = escape($_FILES['image']['name']);
+        $postImageTemp = escape($_FILES['image']['tmp_name']);
 
-        $postTags = $_POST['post_tags'];
-        $postContent = $_POST['post_content'];
+        $postTags = escape($_POST['post_tags']);
+        $postContent = escape($_POST['post_content']);
         $postDate = date('d-m-y');
         
         move_uploaded_file($postImageTemp, "../images/$postImage");
@@ -46,8 +46,8 @@
         $selectCategories = mysqli_query($connection, $query);
         confirmQuery($selectCategories);
         while($row = mysqli_fetch_assoc($selectCategories)) {
-            $catId = $row['cat_id'];
-            $catTitle = $row['cat_title'];
+            $catId = escape($row['cat_id']);
+            $catTitle = escape($row['cat_title']);
 
             echo "<option value='$catId'>{$catTitle}</option>";
         
@@ -67,8 +67,8 @@
         $selectUsers = mysqli_query($connection, $query);
         confirmQuery($selectUsers);
         while($row = mysqli_fetch_assoc($selectUsers)) {
-            $userId = $row['user_id'];
-            $username = $row['username'];
+            $userId = escape($row['user_id']);
+            $username = escape($row['username']);
 
             echo "<option value='$username'>{$username}</option>";
         

@@ -3,12 +3,12 @@
     <label for="catTitle">Edit Category</label>
     <?php 
     if (isset($_GET['edit'])) {
-        $catId = $_GET['edit'];
+        $catId = escape($_GET['edit']);
         $query = "SELECT * FROM categories WHERE cat_id = {$catId}";
         $selectCategoriesId = mysqli_query($connection, $query);
         while($row = mysqli_fetch_assoc($selectCategoriesId)) {
-            $catId = $row['cat_id'];
-            $catTitle = $row['cat_title'];
+            $catId = escape($row['cat_id']);
+            $catTitle = escape($row['cat_title']);
 
             ?>
             <input value="<?php if(isset($catTitle)) { echo $catTitle;} ?>" class="form-control" type="text" name="catTitle">
@@ -20,7 +20,7 @@
     <?php 
     // UPDATE QUERY
     if(isset($_POST['updateCategory'])) {
-        $catTitleEdit = $_POST['catTitle'];
+        $catTitleEdit = escape($_POST['catTitle']);
         $query = "UPDATE categories SET cat_title = '{$catTitleEdit}'WHERE cat_id = {$catId} ";
         $updateQuery = mysqli_query($connection,$query);
         if (!$updateQuery) {

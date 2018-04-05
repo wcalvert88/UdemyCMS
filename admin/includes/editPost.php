@@ -1,33 +1,33 @@
 <?php 
 if(isset($_GET['p_id'])) {
-    $pId = $_GET['p_id'];
+    $pId = escape($_GET['p_id']);
 }
 $query = "SELECT * FROM posts WHERE post_id = $pId";
 $selectPostsById = mysqli_query($connection, $query);
 while($row = mysqli_fetch_assoc($selectPostsById)) {
-    $postId = $row['post_id'];
-    $postUser = $row['post_user'];
-    $postTitle = $row['post_title'];
-    $postCategoryId = $row['post_category_id'];
-    $postStatus = $row['post_status'];
-    $postImage = $row['post_image'];
-    $postContent = $row['post_content'];
-    $postTags = $row['post_tags'];
-    $postCommentCount = $row['post_comment_count'];
-    $postDate = $row['post_date'];
+    $postId = escape($row['post_id']);
+    $postUser = escape($row['post_user']);
+    $postTitle = escape($row['post_title']);
+    $postCategoryId = escape($row['post_category_id']);
+    $postStatus = escape($row['post_status']);
+    $postImage = escape($row['post_image']);
+    $postContent = escape($row['post_content']);
+    $postTags = escape($row['post_tags']);
+    $postCommentCount = escape($row['post_comment_count']);
+    $postDate = escape($row['post_date']);
 }
 
 if (isset($_POST['update_post'])) {
-    $postTitle = $_POST['title'];
-    $postUser = $_POST['post_user'];
-    $postCategoryId = $_POST['post_category'];
-    $postStatus = $_POST['post_status'];
+    $postTitle = escape($_POST['title']);
+    $postUser = escape($_POST['post_user']);
+    $postCategoryId = escape($_POST['post_category']);
+    $postStatus = escape($_POST['post_status']);
 
-    $postImage = $_FILES['image']['name'];
-    $postImageTemp = $_FILES['image']['tmp_name'];
+    $postImage = escape($_FILES['image']['name']);
+    $postImageTemp = escape($_FILES['image']['tmp_name']);
 
-    $postTags = $_POST['post_tags'];
-    $postContent = $_POST['post_content'];
+    $postTags = escape($_POST['post_tags']);
+    $postContent = escape($_POST['post_content']);
 
     move_uploaded_file($postImageTemp, "../images/$postImage");
 
@@ -36,7 +36,7 @@ if (isset($_POST['update_post'])) {
         $selectImage = mysqli_query($connection, $query);
         
         while ($row = mysqli_fetch_array($selectImage)) {
-            $postImage = $row['post_image'];
+            $postImage = escape($row['post_image']);
         }
     }
 
@@ -76,8 +76,8 @@ if (isset($_POST['update_post'])) {
         $selectCategories = mysqli_query($connection, $query);
         confirmQuery($selectCategories);
         while($row = mysqli_fetch_assoc($selectCategories)) {
-            $catId = $row['cat_id'];
-            $catTitle = $row['cat_title'];
+            $catId = escape($row['cat_id']);
+            $catTitle = escape($row['cat_title']);
 
             echo "<option value='$catId'>{$catTitle}</option>";
         
@@ -104,8 +104,8 @@ if (isset($_POST['update_post'])) {
         $selectUsers = mysqli_query($connection, $query);
         confirmQuery($selectUsers);
         while($row = mysqli_fetch_assoc($selectUsers)) {
-            $userId = $row['user_id'];
-            $username = $row['username'];
+            $userId = escape($row['user_id']);
+            $username = escape($row['username']);
 
             echo "<option value='$username'>{$username}</option>";
         

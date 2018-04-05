@@ -46,7 +46,7 @@ function insertCategories() {
 
     global $connection;
     if (isset($_POST['submit'])) {
-        $catTitle = $_POST['catTitle'];
+        $catTitle = escape($_POST['catTitle']);
 
         if ($catTitle == "" || empty($catTitle)) {
 
@@ -69,8 +69,8 @@ function findAllCategories() {
     $query = "SELECT * FROM categories";
     $selectCategories = mysqli_query($connection, $query);
     while($row = mysqli_fetch_assoc($selectCategories)) {
-        $catId = $row['cat_id'];
-        $catTitle = $row['cat_title'];
+        $catId = escape($row['cat_id']);
+        $catTitle = escape($row['cat_title']);
         echo "<tr>";
         echo "<td>{$catId}</td>";
         echo "<td>{$catTitle}</td>";
@@ -84,7 +84,7 @@ function deleteCategories() {
     global $connection;
     // DELETE QUERY
     if(isset($_GET['delete'])) {
-        $catIdDel = $_GET['delete'];
+        $catIdDel = escape($_GET['delete']);
     $query = "DELETE FROM categories WHERE cat_id = {$catIdDel} ";
     $deleteQuery = mysqli_query($connection,$query);
     header("Location: categories.php");

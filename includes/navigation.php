@@ -19,7 +19,7 @@
                     $selectAllCategoriesQuery = mysqli_query($connection, $query);
                     
                     while($row = mysqli_fetch_assoc($selectAllCategoriesQuery)) {
-                        $catTitle = $row['cat_title'];
+                        $catTitle = escape($row['cat_title']);
                         echo "<li><a href='#'>{$catTitle}</a></li>";
                     }
                     ?>

@@ -18,7 +18,7 @@ include "includes/navigation.php";
         <div class="col-md-8">
             <?php 
             if(isset($_GET['p_id'])) {
-                $postId = $_GET['p_id'];
+                $postId = escape($_GET['p_id']);
             
                 $viewQuery = "UPDATE posts SET post_views_count = post_views_count + 1 WHERE post_id = {$postId} ";
                 $sendQuery = mysqli_query($connection, $viewQuery);
@@ -32,11 +32,11 @@ include "includes/navigation.php";
         $query = "SELECT * FROM posts WHERE post_id = {$postId} ";
             $selectAllPostsQuery = mysqli_query($connection, $query);
             while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
-                $postTitle = $row['post_title'];
-                $postAuthor = $row['post_author'] ?: $row['post_user'];
-                $postDate = $row['post_date'];
-                $postImage = $row['post_image'];
-                $postContent = $row['post_content'];
+                $postTitle = escape($row['post_title']);
+                $postAuthor = escape($row['post_author']) ?: escape($row['post_user']);
+                $postDate = escape($row['post_date']);
+                $postImage = escape($row['post_image']);
+                $postContent = escape($row['post_content']);
                 
                 ?>
 
@@ -143,9 +143,9 @@ include "includes/navigation.php";
             die ("QUERY FAILED" . mysqli_error($connection));
         }
         while ($row = mysqli_fetch_array($selectCommentQuery)) {
-            $commentDate = $row['comment_date'];
-            $commentContent = $row['comment_content'];
-            $commentAuthor = $row['comment_author'];
+            $commentDate = escape($row['comment_date']);
+            $commentContent = escape($row['comment_content']);
+            $commentAuthor = escape($row['comment_author']);
             ?>
 
                         <!-- Comment -->
