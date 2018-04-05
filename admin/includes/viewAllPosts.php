@@ -1,7 +1,6 @@
 <?php
 if (isset($_POST['checkBoxArray'])){
-    $postCheckBoxArray = escape($_POST['checkBoxArray']);
-    foreach($postCheckBoxArray as $postValueId) {
+    foreach($_POST['checkBoxArray'] as $postValueId) {
         $bulkOptions = escape($_POST['bulkOptions']);
 
         switch ($bulkOptions) {

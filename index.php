@@ -39,7 +39,7 @@ include "includes/navigation.php";
 
 
 
-                $query = "SELECT * FROM posts WHERE post_status = 'Published' LIMIT {$page1},$perPage";
+                $query = "SELECT * FROM posts WHERE post_status = 'Published' ORDER BY post_date DESC LIMIT {$page1},$perPage ";
                 $selectAllPostsQuery = mysqli_query($connection, $query);
                 while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
                     $postId = escape($row['post_id']);
