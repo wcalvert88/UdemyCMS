@@ -33,7 +33,7 @@ include "includes/navigation.php";
             $selectAllPostsQuery = mysqli_query($connection, $query);
             while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
                 $postTitle = $row['post_title'];
-                $postAuthor = $row['post_author'];
+                $postAuthor = $row['post_author'] ?: $row['post_user'];
                 $postDate = $row['post_date'];
                 $postImage = $row['post_image'];
                 $postContent = $row['post_content'];

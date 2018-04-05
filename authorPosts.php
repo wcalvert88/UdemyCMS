@@ -24,11 +24,12 @@ include "includes/navigation.php";
 
 
 
-        $query = "SELECT * FROM posts WHERE post_author = '{$postAuthor}' ";
+        $query = "SELECT * FROM posts WHERE post_author = '{$postAuthor}' OR post_user = '{$postAuthor}' ";
             $selectAllPostsQuery = mysqli_query($connection, $query);
             while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
                 $postTitle = $row['post_title'];
                 $postAuthor = $row['post_author'];
+                $postUser = $row['post_user'];
                 $postDate = $row['post_date'];
                 $postImage = $row['post_image'];
                 $postContent = $row['post_content'];
@@ -45,7 +46,11 @@ include "includes/navigation.php";
                     <a href="#"><?php echo $postTitle ?></a>
                 </h2>
                 <p class="lead">
-                    All Posts by <?php echo $postAuthor ?>
+                    All Posts by <?php if (!empty($postAuthor)) {
+                        echo $postAuthor; 
+                    } else {
+                        echo $postUser;
+                    } ?>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate ?></p>
                 <hr>
