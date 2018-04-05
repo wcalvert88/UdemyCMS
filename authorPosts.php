@@ -18,8 +18,8 @@ include "includes/navigation.php";
         <div class="col-md-8">
             <?php 
             if(isset($_GET['p_id'])) {
-                $postId = $_GET['p_id'];
-                $postAuthor = $_GET['author'];
+                $postId = escape($_GET['p_id']);
+                $postAuthor = escape($_GET['author']);
             }
 
 

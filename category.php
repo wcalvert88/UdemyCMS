@@ -19,7 +19,7 @@ include "includes/navigation.php";
                 <?php 
                 
                 if(isset($_GET['category'])) {
-                    $postCategoryId = $_GET['category'];
+                    $postCategoryId = escape($_GET['category']);
                 }
 
                 $query = "SELECT * FROM posts WHERE post_category_id = {$postCategoryId}";

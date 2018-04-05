@@ -1,3 +1,4 @@
+<?php //include "./admin/includes/functions.php"; ?>
 <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
         <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -30,7 +31,7 @@
                     <?php 
                     if (isset($_SESSION['userRole'])) {
                         if (isset($_GET['p_id'])) {
-                            $postId = $_GET['p_id'];
+                            $postId = escape($_GET['p_id']);
                             echo "<li><a href='admin/posts.php?source=edit_post&p_id={$postId}'>Edit Post</a></li>";
 
                         }
