@@ -76,9 +76,14 @@ include "includes/navigation.php";
             
             if(isset($_POST['create_comment'])) {
                 $postId = $_GET['p_id'];
+                $postId = mysqli_real_escape_string($connection, $postId);
                 $commentAuthor = $_POST['comment_author'];
+                $commentAuthor = mysqli_real_escape_string($connection, $commentAuthor);
                 $commentEmail = $_POST['comment_email'];
+                $commentEmail = mysqli_real_escape_string($connection, $commentEmail);
                 $commentContent = $_POST['comment_content'];
+                $commentContent = trim(str_replace("<p>&nbsp;</p>", "", $commentContent));
+                $commentContent = mysqli_real_escape_string($connection, $commentContent);
 
                 if(!empty($commentAuthor) && !empty($commentEmail) && !empty($commentContent) && $commentContent != '') {
 
@@ -143,8 +148,11 @@ include "includes/navigation.php";
         }
         while ($row = mysqli_fetch_array($selectCommentQuery)) {
             $commentDate = $row['comment_date'];
+            $commentDate = mysqli_real_escape_string($connection, $commentDate);
             $commentContent = $row['comment_content'];
+            $commentContent = mysqli_real_escape_string($connection, $commentContent);
             $commentAuthor = $row['comment_author'];
+            $commentAuthor = mysqli_real_escape_string($connection, $commentAuthor);
             ?>
 
                         <!-- Comment -->
