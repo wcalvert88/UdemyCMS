@@ -40,10 +40,10 @@ include "includes/navigation.php";
                 
                 ?>
 
-                <h1 class="page-header">
-                Page Heading
-                <small>Secondary Text</small>
-                </h1>
+                <!-- <h1 class="page-header">
+                <?php echo $postTitle; ?>
+                <small><?php echo "by " . $postAuthor?></small>
+                </h1> -->
 
                 <!-- First Blog Post -->
                 <h2>

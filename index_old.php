@@ -34,8 +34,8 @@ include "includes/navigation.php";
                     ?>
 
                     <h1 class="page-header">
-                    Page Heading
-                    <small>Secondary Text</small>
+                    CMS Home Page
+                    <!-- <small>Secondary Text</small> -->
                     </h1>
 
                     <!-- First Blog Post -->
