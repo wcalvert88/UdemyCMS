@@ -29,6 +29,10 @@
                     <li>
                         <a href="admin">Admin</a>
                     </li>
+
+                    <li>
+                        <a href="registration.php">Registration</a>
+                    </li>
                     <?php 
                     if (isset($_SESSION['userRole'])) {
                         if (isset($_GET['p_id'])) {
@@ -43,7 +47,7 @@
                     
                     ?>
                     <li>
-                        <a href="#">Contact</a>
+                        <a href="contact.php">Contact</a>
                     </li> -->
                 </ul>
             </div>
