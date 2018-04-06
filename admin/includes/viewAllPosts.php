@@ -1,4 +1,6 @@
 <?php
+
+include("deleteModal.php");
 if (isset($_POST['checkBoxArray'])){
     foreach($_POST['checkBoxArray'] as $postValueId) {
         $bulkOptions = escape($_POST['bulkOptions']);
@@ -153,7 +155,8 @@ if (isset($_POST['checkBoxArray'])){
             echo "<td>{$postDate}</td>";
             echo "<td><a href='../post.php?p_id={$postId}'>View Post</td>";
             echo "<td><a href='posts.php?source=edit_post&p_id={$postId}'>Edit</td>";
-            echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?'); \"href='posts.php?delete={$postId}'>Delete</td>";
+            echo "<td><a rel='$postId' href='' class='delete_link'>Delete</a></td>";
+            // echo "<td><a onClick=\"javascript: return confirm('Are you sure you want to delete this post?'); \"href='posts.php?delete={$postId}'>Delete</td>";
             echo "<td><a href='posts.php?reset={$postId}'>{$postViewsCount}</a></td>";
             echo "</tr>";
         }
@@ -176,3 +179,13 @@ if(isset($_GET['reset'])){
     header("Location: posts.php");
 }
 ?>
+
+<script>
+$(document).ready(function() {
+    $(".delete_link").on('click', function() {
+        var id = $(this).attr("rel");
+        alert(id);
+    })
+});
+
+</script>

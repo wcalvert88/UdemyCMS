@@ -49,6 +49,9 @@ if(!isset($_SESSION['userRole'])) {
 
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script src="https://cdn.ckeditor.com/ckeditor5/1.0.0-beta.1/classic/ckeditor.js"></script>
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
 </head>
 
 <body>
