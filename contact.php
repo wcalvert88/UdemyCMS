@@ -2,13 +2,17 @@
 <?php include "includes/header.php"; ?>
 
 <?php 
-
 if (isset($_POST['submit'])) {
-
     $to = "wcalvert88@gmail.com";
-    $subject = escape($_POST['subject']);
-    $body = escape($_POST['body']);
+    $subject = wordwrap($_POST['subject'],70);
+    $body = wordwrap($_POST['body'],70);
+    $header = "From: " . $_POST['email'] . "\r\n" . 'Content-type: text/html; charset=utf-8';
 
+// use wordwrap() if lines are longer than 70 characters
+
+
+// send email
+mail($to,$subject,$body, $header);
 
 }
 
