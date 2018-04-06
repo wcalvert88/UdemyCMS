@@ -35,7 +35,18 @@ include "includes/navigation.php";
             if(isset($_GET['category'])) {
                 $postCategoryId = escape($_GET['category']);
             }
-
+            ?>
+            <h1 class="page-header">
+                <?php
+                $titleQuery = "SELECT * FROM categories WHERE cat_id = $postCategoryId";
+                $getCatTitle = mysqli_query($connection, $titleQuery);
+                $rowCat = mysqli_fetch_assoc($getCatTitle);
+                $catTitle = escape($rowCat['cat_title']);
+                echo $catTitle; 
+                ?>
+            <!-- <small>Secondary Text</small> -->
+            </h1>
+            <?php
             $query = "SELECT * FROM posts WHERE post_category_id = {$postCategoryId} AND post_status = 'Published' ";
             $selectAllPostsQueryCount = mysqli_query($connection, $query);
             $count = mysqli_num_rows($selectAllPostsQueryCount);
@@ -53,23 +64,15 @@ include "includes/navigation.php";
                 
                 ?>
 
-                <h1 class="page-header">
-                <?php
-                $titleQuery = "SELECT * FROM categories WHERE cat_id = $postCategoryId";
-                $getCatTitle = mysqli_query($connection, $titleQuery);
-                $rowCat = mysqli_fetch_assoc($getCatTitle);
-                $catTitle = escape($rowCat['cat_title']);
-                echo $catTitle; 
-                ?>
-                <!-- <small>Secondary Text</small> -->
-                </h1>
+                
+                
 
                 <!-- First Blog Post -->
                 <h2>
                     <a href="post.php?p_id=<?php echo $postId; ?>"><?php echo $postTitle ?></a>
                 </h2>
                 <p class="lead">
-                    by <a href="index.php"><?php echo $postAuthor ?></a>
+                    by <a href="authorPosts.php?author=<?php echo $postAuthor; ?>"><?php echo $postAuthor ?></a>
                 </p>
                 <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate ?></p>
                 <hr>
