@@ -56,10 +56,7 @@ if (isset($_GET['edit_user'])) {
     }
 } else {
     header("Location: index.php");
-
 }
-
-
 ?>
 
 <form action="" method="post" enctype="multipart/form-data">

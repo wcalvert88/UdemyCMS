@@ -39,11 +39,7 @@
             while ($row = mysqli_fetch_assoc($selectPostIdQuery)) {
                 $postId = escape($row['post_id']);
                 $postTitle = escape($row['post_title']);
-
             }
-
-
-
 
             echo "<td><a href='../post.php?p_id={$postId}'>$postTitle</a></td>";
             echo "<td>{$commentDate}</td>";
@@ -61,9 +57,7 @@ if(isset($_GET['delete'])){
     $theCommentId = escape($_GET['delete']);
     $query = "DELETE FROM comments WHERE comment_id = {$theCommentId} ";
     $deleteQuery = mysqli_query($connection, $query);
-
     header("Location: comments.php");
-
 }
 
 if(isset($_GET['unapprove'])){
@@ -76,7 +70,6 @@ $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {
         echo "UNAPPROVED";
     }
     header("Location: comments.php");
-
 }
 
 if(isset($_GET['approve'])){
@@ -84,8 +77,5 @@ if(isset($_GET['approve'])){
     $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = {$theCommentId}";
     $approveQuery = mysqli_query($connection, $query);
     header("Location: comments.php");
-
 }
-
-
 ?>

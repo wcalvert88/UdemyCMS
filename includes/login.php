@@ -1,16 +1,15 @@
-<?php include "db.php"; ?>
-<?php include "../admin/includes/functions.php"; ?>
-<?php session_start(); ?>
-<?php 
+<?php session_start();
+include "db.php";
+include "../admin/includes/functions.php";
 
 if (isset($_POST['login'])) {
     $username = escape($_POST['username']);
     $password = escape($_POST['password']);
 }
-$username = escape($username);
-$password = escape($password);
-echo $username;
-echo $password;
+// $username = escape($username);
+// $password = escape($password);
+// echo $username;
+// echo $password;
 $query = "SELECT * FROM users WHERE username = '{$username}' ";
 $selectUserQuery = mysqli_query($connection, $query);
 if (!$selectUserQuery) {

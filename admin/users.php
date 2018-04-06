@@ -12,14 +12,10 @@ include "includes/adminHeader.php";
     <div class="container-fluid">
 
         <!-- Page Heading -->
-        <?php include "includes/adminHeading.php"; ?>
-
-        <?php 
+        <?php include "includes/adminHeading.php";
         
         if (isset($_GET['source'])) {
-
             $source = escape($_GET['source']);
-
         } else {
             $source = '';
         }

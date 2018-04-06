@@ -31,18 +31,12 @@
             echo "<td>{$userLastname}</td>";
             echo "<td>{$userEmail}</td>";
             echo "<td>{$userRole}</td>";
-            
-            
-
             // $query = "SELECT * FROM posts WHERE post_id = {$userPostId} ";
             // $selectPostIdQuery = mysqli_query($connection, $query);
-
             // while ($row = mysqli_fetch_assoc($selectPostIdQuery)) {
             //     $postId = $row['post_id'];
             //     $postTitle = $row['post_title'];
-
             // }
-
 
             echo "<td><a href='users.php?change_to_admin={$userId}'>Admin</td>";
             echo "<td><a href='users.php?change_to_sub={$userId}'>Subscriber</td>";
@@ -57,8 +51,8 @@
 <?php 
 if(isset($_GET['delete'])){
 
-    if(isset($_SESSION['user_role'])){
-        if($_SESSION['user_role'] == 'Admin') {
+    if(isset($_SESSION['userRole'])){
+        if($_SESSION['userRole'] == 'Admin') {
 
     
         $theuserId = escape($_GET['delete']);
@@ -76,7 +70,6 @@ if(isset($_GET['change_to_sub'])){
     $changeSubQuery = mysqli_query($connection, $query);
 
     header("Location: users.php");
-
 }
 
 if(isset($_GET['change_to_admin'])){
@@ -84,7 +77,6 @@ if(isset($_GET['change_to_admin'])){
     $query = "UPDATE users SET user_role = 'Admin' WHERE user_id = {$theuserId}";
     $changeAdminQuery = mysqli_query($connection, $query);
     header("Location: users.php");
-
 }
 
 
