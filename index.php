@@ -37,7 +37,9 @@ include "includes/navigation.php";
                 $count = mysqli_num_rows($findCount);
                 $count = ceil($count / $perPage);
 
-
+                if ($count < 1) {
+                    echo "<h1 class='text-center'>No Posts Available</h1>";
+                } else {
 
                 $query = "SELECT * FROM posts WHERE post_status = 'Published' ORDER BY post_date DESC LIMIT {$page1},$perPage ";
                 $selectAllPostsQuery = mysqli_query($connection, $query);
@@ -50,7 +52,6 @@ include "includes/navigation.php";
                     $postContent = escape(substr($row['post_content'], 0, 100));
                     $postStatus = escape($row['post_status']);
 
-                    if ($postStatus == 'Published') {
                     
                     ?>
 
