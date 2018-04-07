@@ -31,11 +31,15 @@ if (isset($_POST['checkBoxArray'])){
                     $postTitle = escape($row['post_title']);
                     $postCategoryId = escape($row['post_category_id']);
                     $postDate = escape($row['post_date']);
-                    $postAuthor = escape($row['post_author']);
+                    $postAuthor = escape($row['post_author']) ?: escape($row['post_user']);
                     $postStatus = escape($row['post_status']);
                     $postImage = escape($row['post_image']);
                     $postTags = escape($row['post_tags']);
                     $postContent = escape($row['post_content']);
+                }
+
+                if(empty($postTags)) {
+                    $postTags = "No Tags";
                 }
                 $query = "INSERT INTO posts(post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_status) ";
                 $query .= "VALUES({$postCategoryId}, '{$postTitle}', '{$postAuthor}', '{$postDate}', '{$postImage}', '{$postContent}', '{$postTags}','{$postStatus}') ";
