@@ -21,7 +21,20 @@
                     while($row = mysqli_fetch_assoc($selectAllCategoriesQuery)) {
                         $catTitle = escape($row['cat_title']);
                         $catId = escape($row['cat_id']);
-                        echo "<li><a href='category.php?category={$catId}'>{$catTitle}</a></li>";
+                        $categoryClass = '';
+                        $registrationClass = '';
+                        $contactClass = '';
+                        $pageName = basename($_SERVER['PHP_SELF']);
+                        $registration = 'registration.php';
+                        $contact = 'contact.php';
+                        if(isset($_GET['category']) && $_GET['category'] == $catId) {
+                            $categoryClass = 'active';
+                        } else if ($pageName == $registration) {
+                            $registrationClass = 'active';
+                        } else if ($pageName == $contact) {
+                            $contactClass = 'active';
+                        }
+                        echo "<li class='{$categoryClass}'><a href='category.php?category={$catId}'>{$catTitle}</a></li>";
                     }
                     ?>
 
@@ -30,7 +43,7 @@
                         <a href="admin">Admin</a>
                     </li>
 
-                    <li>
+                    <li class='<?php echo $registrationClass; ?>'>
                         <a href="registration.php">Registration</a>
                     </li>
                     <?php 
@@ -46,7 +59,7 @@
                     
                     
                     ?>
-                    <li>
+                    <li class='<?php echo $contactClass?>'>
                         <a href="contact.php">Contact</a>
                     </li> 
                 </ul>
