@@ -32,7 +32,17 @@ include "includes/navigation.php";
                     $page1 = ($page * $perPage) - $perPage;
                 }
 
-                $postQueryCount = "SELECT * FROM posts WHERE post_status = 'Published'";
+                if (isset($_SESSION['userRole'])) {
+                    if ($_SESSION['userRole'] == 'Admin') {
+    
+                        $query = "SELECT * FROM posts ";
+                        $postQueryCount = "SELECT * FROM posts ";
+    
+                }} else {
+                    $query = "SELECT * FROM posts WHERE post_status = 'Published' ";
+                    $postQueryCount = "SELECT * FROM posts WHERE post_status = 'Published'";
+                }
+                
                 $findCount = mysqli_query($connection, $postQueryCount);
                 $count = mysqli_num_rows($findCount);
                 $count = ceil($count / $perPage);
@@ -40,22 +50,17 @@ include "includes/navigation.php";
                 if ($count < 1) {
                     echo "<h1 class='text-center'>No Posts Available</h1>";
                 } else {
-
-                $query = "SELECT * FROM posts WHERE post_status = 'Published' ORDER BY post_date DESC LIMIT {$page1},$perPage ";
+                $query .= "ORDER BY post_date DESC LIMIT {$page1},$perPage ";
                 $selectAllPostsQuery = mysqli_query($connection, $query);
                 while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
                     $postId = escape($row['post_id']);
                     $postTitle = escape($row['post_title']);
-                    $postAuthor = escape($row['post_user']) ?: escape($row['post_author']);
+                    $postAuthor = escape($row['post_author']) ?: escape($row['post_user']);
                     $postDate = escape($row['post_date']);
                     $postImage = escape($row['post_image']);
                     $postContent = escape(substr($row['post_content'], 0, 100));
                     $postStatus = escape($row['post_status']);
-
-                    
                     ?>
-
-                    
 
                     <!-- First Blog Post -->
                     <h2>

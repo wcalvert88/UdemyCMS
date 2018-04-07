@@ -48,7 +48,7 @@
                     ?>
                     <li>
                         <a href="contact.php">Contact</a>
-                    </li> -->
+                    </li> 
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

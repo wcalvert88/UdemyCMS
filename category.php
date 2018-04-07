@@ -47,7 +47,15 @@ include "includes/navigation.php";
             <!-- <small>Secondary Text</small> -->
             </h1>
             <?php
-            $query = "SELECT * FROM posts WHERE post_category_id = {$postCategoryId} AND post_status = 'Published' ";
+             if (isset($_SESSION['userRole'])) {
+                if ($_SESSION['userRole'] == 'Admin') {
+
+                $query = "SELECT * FROM posts WHERE post_category_id = {$postCategoryId} ";
+
+            }} else {
+                $query = "SELECT * FROM posts WHERE post_category_id = {$postCategoryId} AND post_status = 'Published' ";
+            }
+
             $selectAllPostsQueryCount = mysqli_query($connection, $query);
             $count = mysqli_num_rows($selectAllPostsQueryCount);
             $count = ceil($count / $perPage);
