@@ -34,7 +34,7 @@ include "includes/navigation.php";
 
             if(isset($_GET['category'])) {
                 $postCategoryId = escape($_GET['category']);
-            }
+            
             ?>
             <h1 class="page-header">
                 <?php
@@ -54,6 +54,10 @@ include "includes/navigation.php";
 
             $query .= "ORDER BY post_date DESC LIMIT {$page1},$perPage ";
             $selectAllPostsQuery = mysqli_query($connection, $query);
+            if(mysqli_num_rows($selectAllPostsQuery) < 1) {
+
+                echo "<h1 class='text-center'>No Published Posts in this Category</h1>";
+            } else {
             while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
                 $postId = escape($row['post_id']);
                 $postTitle = escape($row['post_title']);
@@ -84,6 +88,8 @@ include "includes/navigation.php";
 
                 <hr>
             <?php
+            } } } else {
+                header("Location: index.php");
             }
             ?>
             
