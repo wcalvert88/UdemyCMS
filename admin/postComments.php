@@ -47,20 +47,6 @@ include "includes/adminHeader.php";
             echo "<td>{$commentId}</td>";
             echo "<td>{$commentAuthor}</td>";
             echo "<td>{$commentContent}</td>";
-            
-
-            // $query = "SELECT * FROM categories WHERE cat_id = {$postCategoryId}";
-            // $selectCategoriesId = mysqli_query($connection, $query);
-            // while($row = mysqli_fetch_assoc($selectCategoriesId)) {
-            //     $catId = $row['cat_id'];
-            //     $catTitle = $row['cat_title'];
-
-
-            // echo "<td>{$catTitle}</td>";
-
-            // }
-
-
             echo "<td>{$commentEmail}</td>";
             echo "<td>{$commentStatus}</td>";
 
@@ -70,11 +56,7 @@ include "includes/adminHeader.php";
             while ($row = mysqli_fetch_assoc($selectPostIdQuery)) {
                 $postId = escape($row['post_id']);
                 $postTitle = escape($row['post_title']);
-
             }
-
-
-
 
             echo "<td><a href='../post.php?p_id={$postId}'>$postTitle</a></td>";
             echo "<td>{$commentDate}</td>";
@@ -99,7 +81,7 @@ if(isset($_GET['delete'])){
 
 if(isset($_GET['unapprove'])){
     $theCommentId = escape($_GET['unapprove']);
-$query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {$theCommentId}";
+    $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {$theCommentId}";
     $unapproveQuery = mysqli_query($connection, $query);
     if (!$unapproveQuery) {
         die ("QUERY FAILED" . mysqli_error($connection));

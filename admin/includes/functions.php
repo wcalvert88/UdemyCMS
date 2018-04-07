@@ -103,7 +103,13 @@ function recordCount($table) {
     return $result;
 }
 
-
+function checkStatus($table, $column, $status) {
+    global $connection;
+    $query = "SELECT * FROM {$table} WHERE {$column} = '{$status}' ";
+    $selectAllPosts = mysqli_query($connection, $query);
+    $result = mysqli_num_rows($selectAllPosts);
+    return $result;
+}
 
 
 

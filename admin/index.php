@@ -22,8 +22,6 @@ include "includes/adminHeader.php";
                             <i class="fa fa-file-text fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            
-
                             <div class='huge'><?php echo $postCounts = recordCount('posts'); ?></div>
                             <div>Posts</div>
                         </div>
@@ -49,7 +47,6 @@ include "includes/adminHeader.php";
 
                             <div class='huge'><?php echo $commentCounts = recordCount('comments'); ?></div>
                             
-
                         <div>Comments</div>
                         </div>
                     </div>
@@ -113,21 +110,14 @@ include "includes/adminHeader.php";
         <!-- /.row -->
 
     <?php 
-    $query = "SELECT * FROM posts WHERE post_status = 'published' ";
-    $selectAllPublishedPosts = mysqli_query($connection, $query);
-    $postPublishedCounts = mysqli_num_rows($selectAllPublishedPosts);
-
-    $query = "SELECT * FROM posts WHERE post_status = 'draft' ";
-    $selectAllDraftPosts = mysqli_query($connection, $query);
-    $postDraftCounts = mysqli_num_rows($selectAllDraftPosts);
-
-    $query = "SELECT * FROM comments WHERE comment_status = 'unapproved' ";
-    $selectAllCommentUnapprove = mysqli_query($connection, $query);
-    $commentUnapproveCounts = mysqli_num_rows($selectAllCommentUnapprove);
     
-    $query = "SELECT * FROM users WHERE user_role = 'subscriber' ";
-    $selectAllUserRole = mysqli_query($connection, $query);
-    $userRoleCounts = mysqli_num_rows($selectAllUserRole);
+    $postPublishedCounts = checkStatus('posts', 'post_status', 'published');
+
+    $postDraftCounts = checkStatus('posts', 'post_status', 'draft');
+
+    $commentUnapproveCounts = checkStatus('comments', 'comment_status', 'unapproved');
+    
+    $userRoleCounts = checkStatus('users', 'user_role', 'subscriber');
     ?>
 
 
