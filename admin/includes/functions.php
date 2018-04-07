@@ -92,7 +92,16 @@ function deleteCategories() {
 }
 
 
+function recordCount($table) {
+    global $connection;
+    $query = "SELECT * FROM {$table} ";
+    $selectAllPosts = mysqli_query($connection, $query);
+    $result = mysqli_num_rows($selectAllPosts);
 
+    confirmQuery($result);
+
+    return $result;
+}
 
 
 

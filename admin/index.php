@@ -1,28 +1,18 @@
 <?php 
 include "includes/adminHeader.php";
 ?>
-<?php 
-
-?>
 <div id="wrapper">
 
 <!-- Navigation -->
 <?php include "includes/adminNavigation.php"; ?>
 
 <div id="page-wrapper">
-
     <div class="container-fluid">
-
         <!-- Page Heading -->
         <?php
         include "includes/adminHeading.php";
-        
         ?>
-        
-        <!-- /.row -->
-    
-        <!-- /.row -->
-        
+
         <div class="row">
         <div class="col-lg-3 col-md-6">
             <div class="panel panel-primary">
@@ -32,14 +22,9 @@ include "includes/adminHeader.php";
                             <i class="fa fa-file-text fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                            <?php 
                             
-                            $query = "SELECT * FROM posts";
-                            $selectAllPosts = mysqli_query($connection, $query);
-                            $postCounts = mysqli_num_rows($selectAllPosts);
 
-                            echo "<div class='huge'>{$postCounts}</div>";
-                            ?>
+                            <div class='huge'><?php echo $postCounts = recordCount('posts'); ?></div>
                             <div>Posts</div>
                         </div>
                     </div>
@@ -61,14 +46,9 @@ include "includes/adminHeader.php";
                             <i class="fa fa-comments fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                        <?php 
-                            
-                            $query = "SELECT * FROM comments";
-                            $selectAllComments = mysqli_query($connection, $query);
-                            $commentCounts = mysqli_num_rows($selectAllComments);
 
-                            echo "<div class='huge'>{$commentCounts}</div>";
-                            ?>
+                            <div class='huge'><?php echo $commentCounts = recordCount('comments'); ?></div>
+                            
 
                         <div>Comments</div>
                         </div>
@@ -91,14 +71,9 @@ include "includes/adminHeader.php";
                             <i class="fa fa-user fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                        <?php 
                             
-                            $query = "SELECT * FROM users";
-                            $selectAllUsers = mysqli_query($connection, $query);
-                            $userCounts = mysqli_num_rows($selectAllUsers);
 
-                            echo "<div class='huge'>{$userCounts}</div>";
-                            ?>
+                            <div class='huge'><?php echo $userCounts = recordCount('users');?></div>
                             <div> Users</div>
                         </div>
                     </div>
@@ -120,14 +95,7 @@ include "includes/adminHeader.php";
                             <i class="fa fa-list fa-5x"></i>
                         </div>
                         <div class="col-xs-9 text-right">
-                        <?php 
-                            
-                            $query = "SELECT * FROM categories";
-                            $selectAllCategories = mysqli_query($connection, $query);
-                            $categoryCounts = mysqli_num_rows($selectAllCategories);
-
-                            echo "<div class='huge'>{$categoryCounts}</div>";
-                            ?>
+                            <div class='huge'><?php echo $categoryCounts = recordCount('categories'); ?></div>
                             <div>Categories</div>
                         </div>
                     </div>
