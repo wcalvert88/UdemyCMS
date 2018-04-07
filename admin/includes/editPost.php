@@ -79,7 +79,11 @@ if (isset($_POST['update_post'])) {
             $catId = escape($row['cat_id']);
             $catTitle = escape($row['cat_title']);
 
-            echo "<option value='$catId'>{$catTitle}</option>";
+            if($catId == $postCategoryId) {
+                echo "<option selected value='{$catId}'>{$catTitle}</option>";
+            } else {
+                echo "<option value='$catId'>{$catTitle}</option>";
+            }
         
         }
         
