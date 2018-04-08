@@ -139,4 +139,63 @@ function usernameExists($username) {
     }
 }
 
+function emailExists($email) {
+    global $connection;
+    $query = "SELECT user_email FROM users WHERE user_email = '{$email}' ";
+    $result = mysqli_query($connection, $query);
+    confirmQuery($result);
+    echo mysqli_num_rows($result);
+    if(!mysqli_num_rows($result)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+function redirect($location) {
+    return header("Location:" . $location);
+}
+
+function registerUser($username, $email, $password) {
+    global $connection;
+    
+    if(usernameExists($username)) {
+        if(!empty($username) && !empty($email) && !empty($password)) {
+
+        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+        $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
+        $query .= "VALUES ('{$username}','{$email}','{$password}', 'Subscriber' ) ";
+        $registerUserQuery = mysqli_query($connection, $query);
+        confirmQuery($registerUserQuery);
+        $message = "Your Registration Has Been Submitted";
+        }
+    }
+}
+
+function loginUser($username, $password) {
+    global $connection;
+    $query = "SELECT * FROM users WHERE username = '{$username}' ";
+    $selectUserQuery = mysqli_query($connection, $query);
+    if (!$selectUserQuery) {
+        die ("QUERY FAILED" . mysqli_error($connection));
+    }
+    while ($row = mysqli_fetch_array($selectUserQuery)) {
+        $dbUserId = escape($row['user_id']);
+        $dbUsername = escape($row['username']);
+        $dbUserPassword = escape($row['user_password']);
+        $dbUserFirstname = escape($row['user_firstname']);
+        $dbUserLastname = escape($row['user_lastname']);
+        $dbUserRole = escape($row['user_role']);
+    }
+
+    if (password_verify($password, $dbUserPassword)) {
+        $_SESSION['username'] = $dbUsername;
+        $_SESSION['firstname'] = $dbFirstname;
+        $_SESSION['lastname'] = $dbLastname;
+        $_SESSION['userRole'] = $dbUserRole;
+        redirect("../admin");
+    } else {
+        redirect("../index.php");
+    }
+}
 ?>

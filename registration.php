@@ -31,8 +31,13 @@ if (isset($_POST['submit'])) {
     if($password == '') {
         $error['password'] = 'Password cannot be empty';
     }
-
-    registerUser($username, $email, $password);
+    foreach ($error as $key => $value) {
+        if(empty($value)) {
+            registerUser($username, $email, $password);
+            loginUser($username, $password);
+        }
+    }
+    
 }
 ?>
 
@@ -51,7 +56,7 @@ if (isset($_POST['submit'])) {
                 <div class="form-wrap">
                 <h1>Register</h1>
                     <form role="form" action="registration.php" method="post" id="login-form" autocomplete="off">
-                        <h6 class="text-center"><?php echo $message; ?></h6>
+                        
                         <div class="form-group">
                             <label for="username" class="sr-only">username</label>
                             <input type="text" name="username" id="username" class="form-control" placeholder="Enter Desired Username">
