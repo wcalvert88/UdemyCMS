@@ -3,30 +3,36 @@ include "includes/header.php"; ?>
 <?php 
 
 if (isset($_POST['submit'])) {
-
     $username = escape($_POST['username']);
     $email = escape($_POST['email']);
     $password = escape($_POST['password']);
-    if(usernameExists($username)) {
-        if(!empty($username) && !empty($email) && !empty($password)) {
 
-        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-        $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
-        $query .= "VALUES ('{$username}','{$email}','{$password}', 'Subscriber' ) ";
-        $registerUserQuery = mysqli_query($connection, $query);
-        if (!$registerUserQuery) {
-            die ("QUERY FAILED " . mysqli_error($connection) . ' ' . mysqli_errno($connection));
-        }
-         $message = "Your Registration Has Been Submitted";
+    $error = [
+        'username'=> '',
+        'email'=> '',
+        'passwrod'=> ''
+    ];
 
-    } else {
-        $message = "Fields cannot be empty";
+    if(strlen($username) < 4) {
+        $error['username'] = 'Username needs to be longer';
     }
-} else {
-    $message = "This user already exists.";
-}
-} else {
-    $message = "";
+    if($username == '') {
+        $error['username'] = 'Username cannot be empty';
+    }
+    if(usernameExists($username)) {
+        $error['username'] = 'Username already exists, try another username';
+    }
+    if($email == '') {
+        $error['email'] = 'Email cannot be empty';
+    }
+    if(emailExists($email)) {
+        $error['email'] = 'Email already exists, <a href="index.php">Please login</a>';
+    }
+    if($password == '') {
+        $error['password'] = 'Password cannot be empty';
+    }
+
+    registerUser($username, $email, $password);
 }
 ?>
 
