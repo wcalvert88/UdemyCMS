@@ -55,7 +55,7 @@ if (isset($_GET['edit_user'])) {
         echo "User Updated" . " <a href='users.php'>View Users?</a>";
     }
 } else {
-    header("Location: index.php");
+    redirect("index.php");
 }
 ?>
 

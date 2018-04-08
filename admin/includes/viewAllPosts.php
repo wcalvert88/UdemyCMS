@@ -147,13 +147,13 @@ if(isset($_GET['delete'])){
     $thePostId = escape($_GET['delete']);
     $query = "DELETE FROM posts WHERE post_id = {$thePostId} ";
     $deleteQuery = mysqli_query($connection, $query);
-    header("Location: posts.php");
+    redirect("posts.php");
 }
 if(isset($_GET['reset'])){
     $thePostId = escape($_GET['reset']);
     $query = "UPDATE posts SET post_views_count = 0 WHERE post_id = {$thePostId} ";
     $resetQuery = mysqli_query($connection, $query);
-    header("Location: posts.php");
+    redirect("posts.php");
 }
 ?>
 

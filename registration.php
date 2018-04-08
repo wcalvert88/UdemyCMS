@@ -37,23 +37,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     foreach ($error as $key => $value) {
         if(empty($value)) {
             unset($error[$key]);
-            // loginUser($username, $password);
+            
         }
     }
 
     if(empty($error)) {
         registerUser($username, $email, $password);
-    }   
+        loginUser($username, $password);
+    }
 }
 ?>
 
-    <!-- Navigation -->
-    
-    <?php  include "includes/navigation.php"; ?>
-    
- 
-    <!-- Page Content -->
-    <div class="container">
+<!-- Navigation -->
+
+<?php  include "includes/navigation.php"; ?>
+
+
+<!-- Page Content -->
+<div class="container">
     
 <section id="login">
     <div class="container">

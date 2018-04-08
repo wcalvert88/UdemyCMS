@@ -57,7 +57,7 @@ if(isset($_GET['delete'])){
     $theCommentId = escape($_GET['delete']);
     $query = "DELETE FROM comments WHERE comment_id = {$theCommentId} ";
     $deleteQuery = mysqli_query($connection, $query);
-    header("Location: comments.php");
+    redirect("comments.php");
 }
 
 if(isset($_GET['unapprove'])){
@@ -69,13 +69,13 @@ $query = "UPDATE comments SET comment_status = 'unapproved' WHERE comment_id = {
     } else {
         echo "UNAPPROVED";
     }
-    header("Location: comments.php");
+    redirect("comments.php");
 }
 
 if(isset($_GET['approve'])){
     $theCommentId = escape($_GET['approve']);
     $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = {$theCommentId}";
     $approveQuery = mysqli_query($connection, $query);
-    header("Location: comments.php");
+    redirect("comments.php");
 }
 ?>

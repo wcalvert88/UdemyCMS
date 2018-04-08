@@ -97,7 +97,7 @@ include "includes/navigation.php";
                 <hr>
             <?php
             } } } else {
-                header("Location: index.php");
+                redirect("index.php");
             }
             ?>
             

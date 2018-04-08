@@ -8,7 +8,7 @@ include "functions.php";
 <?php 
 if(!isset($_SESSION['userRole'])) {
 
-    header("Location: ../index.php");
+    redirect("../index.php");
 }
 
 ?>

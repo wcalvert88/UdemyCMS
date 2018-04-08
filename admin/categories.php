@@ -1,7 +1,7 @@
 <?php 
 include "includes/adminHeader.php";
 if(!is_admin($_SESSION['username'])) {
-    header("Location: index.php");
+    redirect('index.php');
 }
 ?>
 

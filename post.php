@@ -148,7 +148,7 @@ include "includes/navigation.php";
 
     <?php
     }}} else {
-        header("Location: index.php");
+        redirect("index.php");
     }
         ?>
         

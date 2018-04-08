@@ -59,7 +59,7 @@ if(isset($_GET['delete'])){
         $query = "DELETE FROM users WHERE user_id = {$theuserId} ";
         $deleteQuery = mysqli_query($connection, $query);
         
-        header("Location: users.php");
+        redirect("users.php");
         }
     }
 }
@@ -69,14 +69,14 @@ if(isset($_GET['change_to_sub'])){
     $query = "UPDATE users SET user_role = 'Subscriber' WHERE user_id = {$theuserId}";
     $changeSubQuery = mysqli_query($connection, $query);
 
-    header("Location: users.php");
+    redirect("users.php");
 }
 
 if(isset($_GET['change_to_admin'])){
     $theuserId = escape($_GET['change_to_admin']);
     $query = "UPDATE users SET user_role = 'Admin' WHERE user_id = {$theuserId}";
     $changeAdminQuery = mysqli_query($connection, $query);
-    header("Location: users.php");
+    redirect("users.php");
 }
 
 

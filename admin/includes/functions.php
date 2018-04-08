@@ -1,4 +1,9 @@
 <?php 
+ob_start();
+function redirect($location) {
+    return exit(header("Location:" . $location));
+}
+
 
 function escape($string) {
     global $connection;
@@ -150,9 +155,6 @@ function emailExists($email) {
     }
 }
 
-function redirect($location) {
-    return header("Location:" . $location);
-}
 
 function registerUser($username, $email, $password) {
     global $connection;
@@ -183,12 +185,12 @@ function loginUser($username, $password) {
 
     if (password_verify($password, $dbUserPassword)) {
         $_SESSION['username'] = $dbUsername;
-        $_SESSION['firstname'] = $dbFirstname;
-        $_SESSION['lastname'] = $dbLastname;
+        $_SESSION['firstname'] = $dbFirstname ? $dbFirstname : '';
+        $_SESSION['lastname'] = $dbLastname ? $dbLastname : '';
         $_SESSION['userRole'] = $dbUserRole;
-        redirect("../admin");
+        redirect("/UdemyCMS/admin");
     } else {
-        redirect("../index.php");
+        redirect("/UdemyCMS/index.php");
     }
 }
 ?>

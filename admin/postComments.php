@@ -1,7 +1,7 @@
 <?php 
 include "includes/adminHeader.php";
 if(!is_admin($_SESSION['username'])) {
-    header("Location: index.php");
+    redirect("index.php");
 }
 ?>
 
@@ -78,7 +78,7 @@ if(isset($_GET['delete'])){
     $query = "DELETE FROM comments WHERE comment_id = {$theCommentId} ";
     $deleteQuery = mysqli_query($connection, $query);
 
-    header("Location: postComments.php?id=" . escape($_GET['id']));
+    redirect("postComments.php?id=" . escape($_GET['id']));
 
 }
 
@@ -91,7 +91,7 @@ if(isset($_GET['unapprove'])){
     } else {
         echo "UNAPPROVED";
     }
-    header("Location: postComments.php?id=" . escape($_GET['id']));
+    redirect("postComments.php?id=" . escape($_GET['id']));
 
 }
 
@@ -99,7 +99,7 @@ if(isset($_GET['approve'])){
     $theCommentId = escape($_GET['approve']);
     $query = "UPDATE comments SET comment_status = 'approved' WHERE comment_id = {$theCommentId}";
     $approveQuery = mysqli_query($connection, $query);
-    header("Location: postComments.php?id=" . escape($_GET['id']));
+    redirect("postComments.php?id=" . escape($_GET['id']));
 
 }
 
