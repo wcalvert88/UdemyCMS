@@ -20,12 +20,14 @@
     <?php 
     // UPDATE QUERY
     if(isset($_POST['updateCategory'])) {
-        $catTitleEdit = escape($_POST['catTitle']);
-        $query = "UPDATE categories SET cat_title = '{$catTitleEdit}'WHERE cat_id = {$catId} ";
-        $updateQuery = mysqli_query($connection,$query);
-        if (!$updateQuery) {
-            die("Update Query Failed" . mysqli_error($connection));
+        $catTitle = escape($_POST['catTitle']);
+        $stmt = mysqli_prepare($connection, "UPDATE categories SET cat_title = ? WHERE cat_id = ? ");
+        mysqli_stmt_bind_param($stmt, 'si', $catTitle, $catId);
+        mysqli_stmt_execute($stmt);
+        if (!$stmt) {
+            die('QUERY FAILED' . mysqli_error($connection));
         }
+        redirect("categories.php");
     }
     
     ?>
