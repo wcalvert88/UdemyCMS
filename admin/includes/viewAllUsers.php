@@ -50,7 +50,7 @@
 
 <?php 
 if(isset($_GET['delete'])){
-
+    echo $_SESSION['userRole'];
     if(isset($_SESSION['userRole'])){
         if($_SESSION['userRole'] == 'Admin') {
 
@@ -58,7 +58,7 @@ if(isset($_GET['delete'])){
         $theuserId = escape($_GET['delete']);
         $query = "DELETE FROM users WHERE user_id = {$theuserId} ";
         $deleteQuery = mysqli_query($connection, $query);
-
+        
         header("Location: users.php");
         }
     }
