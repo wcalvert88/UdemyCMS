@@ -43,18 +43,23 @@
 
             echo "<td><a href='../post.php?p_id={$postId}'>$postTitle</a></td>";
             echo "<td>{$commentDate}</td>";
-            echo "<td><a href='comments.php?approve={$commentId}'>Approve</td>";
-            echo "<td><a href='comments.php?unapprove={$commentId}'>Unapprove</td>";
-            echo "<td><a href='comments.php?delete={$commentId}'>Delete</td>";
-            echo "</tr>";
+            echo "<td><a class='btn btn-primary' href='comments.php?approve={$commentId}'>Approve</td>";
+            echo "<td><a class='btn btn-primary' href='comments.php?unapprove={$commentId}'>Unapprove</td>";
+            ?>
+            <form method="post">
+                <input type="hidden" name="comment_id" value="<?php echo $commentId; ?>">
+
+                <?php echo '<td><input class="btn btn-danger" type="submit" name="delete" value="Delete"></td>'; ?>
+            </form>
+            <?php echo "</tr>";
         }
         ?>
     </tbody>
 </table>
 
 <?php 
-if(isset($_GET['delete'])){
-    $theCommentId = escape($_GET['delete']);
+if(isset($_POST['delete'])){
+    $theCommentId = escape($_POST['comment_id']);
     $query = "DELETE FROM comments WHERE comment_id = {$theCommentId} ";
     $deleteQuery = mysqli_query($connection, $query);
     redirect("comments.php");

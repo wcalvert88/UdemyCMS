@@ -31,31 +31,28 @@
             echo "<td>{$userLastname}</td>";
             echo "<td>{$userEmail}</td>";
             echo "<td>{$userRole}</td>";
-            // $query = "SELECT * FROM posts WHERE post_id = {$userPostId} ";
-            // $selectPostIdQuery = mysqli_query($connection, $query);
-            // while ($row = mysqli_fetch_assoc($selectPostIdQuery)) {
-            //     $postId = $row['post_id'];
-            //     $postTitle = $row['post_title'];
-            // }
+            echo "<td><a class='btn btn-primary' href='users.php?change_to_admin={$userId}'>Admin</td>";
+            echo "<td><a class='btn btn-primary' href='users.php?change_to_sub={$userId}'>Subscriber</td>";
+            echo "<td><a class='btn btn-info' href='users.php?source=edit_user&edit_user={$userId}'>Edit</td>";
+            ?>
+            <form method="post">
+                <input type="hidden" name="user_id" value="<?php echo $userId; ?>">
 
-            echo "<td><a href='users.php?change_to_admin={$userId}'>Admin</td>";
-            echo "<td><a href='users.php?change_to_sub={$userId}'>Subscriber</td>";
-            echo "<td><a href='users.php?source=edit_user&edit_user={$userId}'>Edit</td>";
-            echo "<td><a href='users.php?delete={$userId}'>Delete</td>";
-            echo "</tr>";
+                <?php echo '<td><input class="btn btn-danger" type="submit" name="delete" value="Delete"></td>'; ?>
+            </form>
+            <?php echo "</tr>";
         }
         ?>
     </tbody>
 </table>
 
 <?php 
-if(isset($_GET['delete'])){
-    echo $_SESSION['userRole'];
+if(isset($_POST['delete'])){
     if(isset($_SESSION['userRole'])){
         if($_SESSION['userRole'] == 'Admin') {
 
     
-        $theuserId = escape($_GET['delete']);
+        $theuserId = escape($_POST['user_id']);
         $query = "DELETE FROM users WHERE user_id = {$theuserId} ";
         $deleteQuery = mysqli_query($connection, $query);
         

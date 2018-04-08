@@ -79,8 +79,15 @@ function findAllCategories() {
         echo "<tr>";
         echo "<td>{$catId}</td>";
         echo "<td>{$catTitle}</td>";
-        echo "<td><a href='categories.php?delete={$catId}'>Delete</a></td>";
-        echo "<td><a href='categories.php?edit={$catId}'>Edit</a></td>";
+        echo "<td><a class='btn btn-info' href='categories.php?edit={$catId}'>Edit</a></td>";
+        ?>
+            <form method="post">
+                <input type="hidden" name="cat_id" value="<?php echo $catId; ?>">
+
+                <?php echo '<td><input class="btn btn-danger" type="submit" name="delete" value="Delete"></td>'; ?>
+            </form>
+        <?php
+        
         echo "</tr>";
     }
 }
@@ -88,8 +95,8 @@ function findAllCategories() {
 function deleteCategories() {
     global $connection;
     // DELETE QUERY
-    if(isset($_GET['delete'])) {
-        $catIdDel = escape($_GET['delete']);
+    if(isset($_POST['delete'])) {
+        $catIdDel = escape($_POST['cat_id']);
     $query = "DELETE FROM categories WHERE cat_id = {$catIdDel} ";
     $deleteQuery = mysqli_query($connection,$query);
     header("Location: categories.php");
