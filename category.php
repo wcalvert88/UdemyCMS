@@ -47,33 +47,47 @@ include "includes/navigation.php";
             <!-- <small>Secondary Text</small> -->
             </h1>
             <?php
-             if (isset($_SESSION['userRole'])) {
-                if ($_SESSION['userRole'] == 'Admin') {
+             if (is_admin($_SESSION['username'])) {
 
-                $query = "SELECT * FROM posts WHERE post_category_id = {$postCategoryId} ";
+                $stmt1 = mysqli_prepare($connection, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? ORDER BY post_date DESC LIMIT ?, ? ");
 
-            }} else {
-                $query = "SELECT * FROM posts WHERE post_category_id = {$postCategoryId} AND post_status = 'Published' ";
+            } else {
+                $stmt2 = mysqli_prepare($connection, "SELECT post_id, post_title, post_author, post_date, post_image, post_content FROM posts WHERE post_category_id = ? AND post_status = ? ORDER BY post_date DESC LIMIT ?, ? ");
+                $published = 'published';
             }
+            if(isset($stmt1)) {
+                mysqli_stmt_bind_param($stmt1, "iii", $postCategoryId, $page1, $perPage);
+                mysqli_stmt_execute($stmt1);
+                mysqli_stmt_bind_result($stmt1, $postId, $postTitle, $postAuthor, $postDate, $postImage, $postContent);
+                
+                mysqli_stmt_store_result($stmt1);
+                $count = mysqli_stmt_num_rows($stmt1);
+                $count = ceil($count / $perPage);
+                mysqli_stmt_fetch($stmt1);
+                $stmt = $stmt1;
+            } else {
+                mysqli_stmt_bind_param($stmt2, "isii", $postCategoryId, $published, $page1, $perPage);
+                mysqli_stmt_execute($stmt2);
+                mysqli_stmt_bind_result($stmt2, $postId, $postTitle, $postAuthor, $postDate, $postImage, $postContent);
+                
+                mysqli_stmt_store_result($stmt2);
+                $count = mysqli_stmt_num_rows($stmt2);
+                $count = ceil($count / $perPage);
+                mysqli_stmt_fetch($stmt2);
+                $stmt = $stmt2;
+            }
+            // $selectAllPostsQueryCount = mysqli_query($connection, $query);
+            // $count = mysqli_stmt_num_rows($stmt);
+            // $count = ceil($count / $perPage);
 
-            $selectAllPostsQueryCount = mysqli_query($connection, $query);
-            $count = mysqli_num_rows($selectAllPostsQueryCount);
-            $count = ceil($count / $perPage);
-
-            $query .= "ORDER BY post_date DESC LIMIT {$page1},$perPage ";
-            $selectAllPostsQuery = mysqli_query($connection, $query);
-            if(mysqli_num_rows($selectAllPostsQuery) < 1) {
+            // $query .= "ORDER BY post_date DESC LIMIT {$page1},$perPage ";
+            // $selectAllPostsQuery = mysqli_query($connection, $query);
+            
+            if(mysqli_stmt_num_rows($stmt) < 1) {
 
                 echo "<h1 class='text-center'>No Published Posts in this Category</h1>";
             } else {
-            while($row = mysqli_fetch_assoc($selectAllPostsQuery)) {
-                $postId = escape($row['post_id']);
-                $postTitle = escape($row['post_title']);
-                $postAuthor = escape($row['post_author']);
-                $postDate = escape($row['post_date']);
-                $postImage = escape($row['post_image']);
-                $postContent = escape(substr($row['post_content'], 0, 100));
-                
+            while(mysqli_stmt_fetch($stmt)):
                 ?>
 
                 
@@ -96,7 +110,7 @@ include "includes/navigation.php";
 
                 <hr>
             <?php
-            } } } else {
+            endwhile; } } else {
                 redirect("index.php");
             }
             ?>
@@ -116,12 +130,12 @@ include "includes/navigation.php";
     for ($i = 1; $i <= $count; $i++) {
         
         if($i == $page) {
-
-            echo "<li><a class='active_link' href='index.php?page={$i}'>{$i}</a></li>";
+            
+            echo "<li><a class='active_link' href='category.php?category={$postCategoryId}&page={$i}'>{$i}</a></li>";
         } else {
 
 
-        echo "<li><a href='index.php?page={$i}'>{$i}</a></li>";
+        echo "<li><a href='category.php?category={$postCategoryId}&page={$i}'>{$i}</a></li>";
         }
     }
     
