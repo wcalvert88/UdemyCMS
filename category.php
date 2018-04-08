@@ -110,7 +110,7 @@ include "includes/navigation.php";
 
                 <hr>
             <?php
-            endwhile; } } else {
+            endwhile; mysqli_stmt_close($stmt); } } else {
                 redirect("index.php");
             }
             ?>
