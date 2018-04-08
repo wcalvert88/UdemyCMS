@@ -34,19 +34,16 @@ include "includes/navigation.php";
 
                 if (isset($_SESSION['userRole'])) {
                     if ($_SESSION['userRole'] == 'Admin') {
-    
                         $query = "SELECT * FROM posts ";
-                        $postQueryCount = "SELECT * FROM posts ";
-    
+                    } else {
+                    $query = "SELECT * FROM posts WHERE post_status = 'Published' ";
+                    
                 }} else {
                     $query = "SELECT * FROM posts WHERE post_status = 'Published' ";
-                    $postQueryCount = "SELECT * FROM posts WHERE post_status = 'Published'";
                 }
-                
-                $findCount = mysqli_query($connection, $postQueryCount);
+                $findCount = mysqli_query($connection, $query);
                 $count = mysqli_num_rows($findCount);
                 $count = ceil($count / $perPage);
-
                 if ($count < 1) {
                     echo "<h1 class='text-center'>No Posts Available</h1>";
                 } else {

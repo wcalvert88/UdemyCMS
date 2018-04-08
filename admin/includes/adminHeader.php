@@ -9,11 +9,6 @@ include "functions.php";
 if(!isset($_SESSION['userRole'])) {
 
     header("Location: ../index.php");
-} else {
-    if ($_SESSION['userRole'] !== 'Admin') {
-        header("Location: ../index.php");
-
-    }
 }
 
 ?>
