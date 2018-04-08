@@ -2,7 +2,7 @@
 include "includes/header.php"; ?>
 <?php 
 
-if (isset($_POST['submit'])) {
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = escape($_POST['username']);
     $email = escape($_POST['email']);
     $password = escape($_POST['password']);
@@ -31,13 +31,19 @@ if (isset($_POST['submit'])) {
     if($password == '') {
         $error['password'] = 'Password cannot be empty';
     }
+    if(strlen($password) < 6) {
+        $error['password'] = 'Password needs to be longer than 6 characters';
+    }
     foreach ($error as $key => $value) {
         if(empty($value)) {
-            registerUser($username, $email, $password);
-            loginUser($username, $password);
+            unset($error[$key]);
+            // loginUser($username, $password);
         }
     }
-    
+
+    if(empty($error)) {
+        registerUser($username, $email, $password);
+    }   
 }
 ?>
 
@@ -75,7 +81,7 @@ if (isset($_POST['submit'])) {
                             <p><?php echo isset($error['password']) ? $error['password'] : ''; ?></p>
                         </div>
                 
-                        <input type="submit" name="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">
+                        <input type="submit" name="register" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Register">
                     </form>
                  
                 </div>

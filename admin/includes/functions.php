@@ -131,8 +131,7 @@ function usernameExists($username) {
     $query = "SELECT username FROM users WHERE username = '{$username}' ";
     $result = mysqli_query($connection, $query);
     confirmQuery($result);
-    echo mysqli_num_rows($result);
-    if(!mysqli_num_rows($result)) {
+    if(mysqli_num_rows($result) > 0) {
         return true;
     } else {
         return false;
@@ -144,8 +143,7 @@ function emailExists($email) {
     $query = "SELECT user_email FROM users WHERE user_email = '{$email}' ";
     $result = mysqli_query($connection, $query);
     confirmQuery($result);
-    echo mysqli_num_rows($result);
-    if(!mysqli_num_rows($result)) {
+    if(mysqli_num_rows($result) > 0) {
         return true;
     } else {
         return false;
@@ -158,18 +156,13 @@ function redirect($location) {
 
 function registerUser($username, $email, $password) {
     global $connection;
-    
-    if(usernameExists($username)) {
-        if(!empty($username) && !empty($email) && !empty($password)) {
 
-        $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
-        $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
-        $query .= "VALUES ('{$username}','{$email}','{$password}', 'Subscriber' ) ";
-        $registerUserQuery = mysqli_query($connection, $query);
-        confirmQuery($registerUserQuery);
-        $message = "Your Registration Has Been Submitted";
-        }
-    }
+    $password = password_hash($password, PASSWORD_BCRYPT, array('cost' => 12));
+    $query = "INSERT INTO users (username, user_email, user_password, user_role) ";
+    $query .= "VALUES ('{$username}','{$email}','{$password}', 'Subscriber' ) ";
+    $registerUserQuery = mysqli_query($connection, $query);
+    confirmQuery($registerUserQuery);
+    
 }
 
 function loginUser($username, $password) {
