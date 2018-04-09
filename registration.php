@@ -1,7 +1,9 @@
 <?php include "includes/db.php"; 
 include "includes/header.php"; 
-
 require 'vendor/autoload.php';
+
+
+
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = escape($_POST['username']);
     $email = escape($_POST['email']);
@@ -43,6 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if(empty($error)) {
         registerUser($username, $email, $password);
+        $pusher->trigger('notifications', 'new_user', $username);
         loginUser($username, $password);
     }
 }
