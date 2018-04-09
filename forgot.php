@@ -39,10 +39,10 @@ if(ifItIsMethod('post')) {
                 </p>';
 
                 if($mail->send()){
-                    echo "IT WAS SENT";
+                    $emailSent = true;
 
                 } else {
-                    echo "NOT SENT";
+                    $emailSent = false;
                 }
                 
 
@@ -69,6 +69,7 @@ if(ifItIsMethod('post')) {
                     <div class="panel-body">
                         <div class="text-center">
 
+                            <?php if(!isset($emailSent)): ?>
 
                                 <h3><i class="fa fa-lock fa-4x"></i></h3>
                                 <h2 class="text-center">Forgot Password?</h2>
@@ -94,7 +95,10 @@ if(ifItIsMethod('post')) {
                                     </form>
 
                                 </div><!-- Body-->
+                            <?php else: ?>
+                                <h2>Please check your email</h2>
 
+                                <?php endif; ?>
                         </div>
                     </div>
                 </div>
