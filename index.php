@@ -61,7 +61,7 @@ include "includes/navigation.php";
 
                     <!-- First Blog Post -->
                     <h2>
-                        <a href="post.php?p_id=<?php echo $postId; ?>"><?php echo $postTitle; ?></a>
+                        <a href="post/<?php echo $postId; ?>"><?php echo $postTitle; ?></a>
                     </h2>
                     <p class="lead">
                         by <a href="authorPosts.php?author=<?php echo $postAuthor; ?>&p_id=<?php echo $postId; ?>"><?php echo $postAuthor; ?></a>

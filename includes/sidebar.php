@@ -21,7 +21,7 @@
 
         <?php if(isset($_SESSION['userRole'])): ?>
         <h4>Logged in as <?php echo $_SESSION['username']; ?></h4>
-        <a href="includes/logout.php" class="btn btn-primary">Logout</a>
+        <a href="/UdemyCMS/includes/logout.php" class="btn btn-primary">Logout</a>
         <?php else: ?>
 
 
@@ -61,7 +61,7 @@
                 while($row = mysqli_fetch_assoc($selectCategoriesSidebar)) {
                     $catTitle = escape($row['cat_title']);
                     $catId = escape($row['cat_id']);
-                    echo "<li><a href='category.php?category={$catId}'>{$catTitle}</a></li>";
+                    echo "<li><a href='category/{$catId}'>{$catTitle}</a></li>";
                 }
                 ?>
 

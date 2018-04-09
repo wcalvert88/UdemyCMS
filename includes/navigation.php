@@ -9,7 +9,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">CMS HOME</a>
+                <a class="navbar-brand" href="/UdemyCMS/index">CMS HOME</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -25,8 +25,8 @@
                         $registrationClass = '';
                         $contactClass = '';
                         $pageName = basename($_SERVER['PHP_SELF']);
-                        $registration = 'registration.php';
-                        $contact = 'contact.php';
+                        $registration = 'registration';
+                        $contact = 'contact';
                         if(isset($_GET['category']) && $_GET['category'] == $catId) {
                             $categoryClass = 'active';
                         } else if ($pageName == $registration) {
@@ -34,23 +34,23 @@
                         } else if ($pageName == $contact) {
                             $contactClass = 'active';
                         }
-                        echo "<li class='{$categoryClass}'><a href='category.php?category={$catId}'>{$catTitle}</a></li>";
+                        echo "<li class='{$categoryClass}'><a href='/UdemyCMS/category/{$catId}'>{$catTitle}</a></li>";
                     }
                     ?>
 
 
                     <li>
-                        <a href="admin">Admin</a>
+                        <a href="/UdemyCMS/admin">Admin</a>
                     </li>
 
                     <li class='<?php echo $registrationClass; ?>'>
-                        <a href="registration.php">Registration</a>
+                        <a href="/UdemyCMS/registration">Registration</a>
                     </li>
                     <?php 
                     if (isset($_SESSION['userRole'])) {
                         if (isset($_GET['p_id'])) {
                             $postId = escape($_GET['p_id']);
-                            echo "<li><a href='admin/posts.php?source=edit_post&p_id={$postId}'>Edit Post</a></li>";
+                            echo "<li><a href='/UdemyCMS/admin/posts.php?source=edit_post&p_id={$postId}'>Edit Post</a></li>";
 
                         }
 
@@ -60,7 +60,7 @@
                     
                     ?>
                     <li class='<?php echo $contactClass?>'>
-                        <a href="contact.php">Contact</a>
+                        <a href="/UdemyCMS/contact">Contact</a>
                     </li> 
                 </ul>
             </div>
