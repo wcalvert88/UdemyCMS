@@ -31,6 +31,21 @@ function escape($string) {
     return mysqli_real_escape_string($connection, trim($string));
 }
 
+function currentUser() {
+    if(isset($_SESSION['username'])){
+        return $_SESSION['username'];
+    }
+    return false;
+}
+
+function imagePlaceholder($image=''){
+    if(!$image){
+        return 'image_4.jpg';
+    } else {
+        return $image;
+    }
+}
+
 function usersOnline() {
     if (isset($_GET['onlineusers'])) {
         global $connection;

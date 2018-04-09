@@ -89,8 +89,9 @@ if (isset($_POST['checkBoxArray'])){
     </thead>
     <tbody>
         <?php 
+        $username = currentUser();
         $query = "SELECT posts.post_id, posts.post_author, posts.post_category_id, posts.post_title, posts.post_user, posts.post_date, posts.post_image, posts.post_content, posts.post_tags, posts.post_comment_count, posts.post_status, posts.post_views_count, categories.cat_id, categories.cat_title FROM posts ";
-        $query .= "LEFT JOIN categories ON posts.post_category_id = categories.cat_id ORDER BY posts.post_id DESC ";
+        $query .= "LEFT JOIN categories ON posts.post_category_id = categories.cat_id WHERE post_user = '{$username}' ORDER BY posts.post_id DESC ";
 
         $selectPosts = mysqli_query($connection, $query);
         while($row = mysqli_fetch_assoc($selectPosts)) {
