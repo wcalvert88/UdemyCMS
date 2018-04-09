@@ -2,3 +2,4 @@ db.php
 images
 cms.sql
 /vendor/
+/Classes/

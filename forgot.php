@@ -1,5 +1,9 @@
 <?php  include "includes/db.php";
 include "includes/header.php"; 
+require './vendor/autoload.php';
+require './classes/config.php';
+
+
 
 if(!ifItIsMethod('get') && !isset($_GET['forgot'])) {
     redirect('index.php');
@@ -16,6 +20,34 @@ if(ifItIsMethod('post')) {
                 mysqli_stmt_bind_param($stmt, "s", $email);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
+
+                /* configure PHPMailer */
+                $mail = new PHPMailer\PHPMailer\PHPMailer();
+
+                $mail->isSMTP();                                      // Set mailer to use SMTP
+                $mail->Host = Config::SMTP_HOST;  // Specify main and backup SMTP servers
+                $mail->Username = Config::SMTP_USER;                 // SMTP username
+                $mail->Password = Config::SMTP_PASSWORD;                           // SMTP password
+                $mail->Port = Config::SMTP_PORT;                                    // TCP port to connect to
+                $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
+                $mail->SMTPAuth = true;                               // Enable SMTP authentication
+                $mail->isHTML(true);
+
+                $mail->setFrom('wcalvert88@gmail.com', 'Wade Calvert');
+                $mail->addAddress($email);
+                $mail->Subject = 'This is a test email';
+
+                $mail->Body = '<h1>Email body</h1>';
+
+                if($mail->send()){
+                    echo "IT WAS SENT";
+
+                } else {
+                    echo "NOT SENT";
+                }
+                
+
+
             } else {
                 echo mysqli_error($connection);
             }
