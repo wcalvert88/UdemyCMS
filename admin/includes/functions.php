@@ -219,7 +219,8 @@ function loginUser($username, $password) {
         $_SESSION['userRole'] = $dbUserRole;
         redirect("/UdemyCMS/admin");
     } else {
-        redirect("/UdemyCMS/index.php");
+        return false;
     }
+    return true;
 }
 ?>

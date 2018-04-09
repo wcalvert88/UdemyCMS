@@ -37,12 +37,21 @@
                         echo "<li class='{$categoryClass}'><a href='/UdemyCMS/category/{$catId}'>{$catTitle}</a></li>";
                     }
                     ?>
+                    <?php if(isLoggedIn()): ?>
+                        <li>
+                            <a href="/UdemyCMS/admin">Admin</a>
+                        </li>
+                        <li>
+                            <a href="/UdemyCMS/includes/logout.php">Logout</a>
+                        </li>
+                    <?php else: ?>
 
-
-                    <li>
-                        <a href="/UdemyCMS/admin">Admin</a>
-                    </li>
-
+                        <li>
+                            <a href="/UdemyCMS/login.php">Login</a>
+                        </li>
+                    <?php endif; ?>
+                    
+                 
                     <li class='<?php echo $registrationClass; ?>'>
                         <a href="/UdemyCMS/registration">Registration</a>
                     </li>
