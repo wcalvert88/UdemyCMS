@@ -2,12 +2,12 @@
 <?php  include "includes/header.php"; ?>
 <?php 
 
-// if(!isset($_GET['email']) && !isset($_GET['token'])){
-//     redirect('index.php');
-// }
+if(!isset($_GET['email']) && !isset($_GET['token'])){
+    redirect('index.php');
+}
 
 if($stmt = mysqli_prepare($connection, 'SELECT username, user_email, token FROM USERS WHERE token = ? ')){
-    mysqli_stmt_bind_param($stmt, "s", $token);
+    mysqli_stmt_bind_param($stmt, "s", $_GET['token']);
     mysqli_stmt_execute($stmt);
     mysqli_stmt_bind_result($stmt, $username, $userEmail, $token);
     mysqli_stmt_fetch($stmt);
@@ -27,10 +27,10 @@ if($stmt = mysqli_prepare($connection, 'SELECT username, user_email, token FROM 
                 mysqli_stmt_execute($stmt);
 
                 if(mysqli_stmt_affected_rows($stmt) >= 1) {
-                    echo "IT WAS AFFECTED";
+                    redirect("/UdemyCMS/login.php");
                 }
-            } else {
-                echo "BAD QUERY";
+                mysqli_stmt_close($stmt);
+                $verified = true;
             }
         } else {
             echo "Passwords need to match";
@@ -44,9 +44,6 @@ if($stmt = mysqli_prepare($connection, 'SELECT username, user_email, token FROM 
 <?php include "includes/navigation.php"; ?>
 
 <div class="container">
-
-
-
 <div class="container">
     <div class="row">
         <div class="col-md-4 col-md-offset-4">
@@ -92,6 +89,7 @@ if($stmt = mysqli_prepare($connection, 'SELECT username, user_email, token FROM 
         </div>
     </div>
 </div>
+
     <hr>
 
     <?php include "includes/footer.php";?>
