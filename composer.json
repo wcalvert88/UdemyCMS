@@ -1,0 +1,13 @@
+{
+    "name": "wade/udemy-cms",
+    "description": "Udemy CMS Project",
+    "require": {
+        "phpmailer/phpmailer": "^6.0"
+    },
+    "authors": [
+        {
+            "name": "Wade Calvert",
+            "email": "wcalvert88@gmail.com"
+        }
+    ]
+}
