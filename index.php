@@ -61,7 +61,7 @@ include "includes/navigation.php";
 
                     <!-- First Blog Post -->
                     <h2>
-                        <a href="post/<?php echo $postId; ?>"><?php echo $postTitle; ?></a>
+                        <a href="post.php?p_id=<?php echo $postId; ?>"><?php echo $postTitle; ?></a>
                     </h2>
                     <p class="lead">
                         by <a href="authorPosts.php?author=<?php echo $postAuthor; ?>&p_id=<?php echo $postId; ?>"><?php echo $postAuthor; ?></a>
@@ -69,7 +69,7 @@ include "includes/navigation.php";
                     <p><span class="glyphicon glyphicon-time"></span> <?php echo $postDate; ?></p>
                     <hr>
                     <a href="post.php?p_id=<?php echo $postId; ?>">
-                    <img class="img-responsive" src="images/<?php echo $postImage; ?>" alt=""></a>
+                    <img class="img-responsive" src="images/<?php echo imagePlaceholder($postImage); ?>" alt=""></a>
                     <hr>
                     <p><?php echo $postContent ?></p>
                     <a class="btn btn-primary" href="post.php?p_id=<?php echo $postId; ?>"">Read More <span class='glyphicon glyphicon-chevron-right'"></span></a>

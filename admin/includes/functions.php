@@ -40,7 +40,7 @@ function currentUser() {
 
 function imagePlaceholder($image=''){
     if(!$image){
-        return 'image_4.jpg';
+        return 'cmsProject.jpg';
     } else {
         return $image;
     }
