@@ -1,9 +1,6 @@
 <?php  include "includes/db.php";
 include "includes/header.php"; 
 require './vendor/autoload.php';
-require './classes/config.php';
-
-
 
 if(!ifItIsMethod('get') && !isset($_GET['forgot'])) {
     redirect('index.php');
@@ -32,7 +29,7 @@ if(ifItIsMethod('post')) {
                 $mail->SMTPSecure = 'tls';                            // Enable TLS encryption, `ssl` also accepted
                 $mail->SMTPAuth = true;                               // Enable SMTP authentication
                 $mail->isHTML(true);
-
+                $mail->Charset = 'UTF-8';
                 $mail->setFrom('wcalvert88@gmail.com', 'Wade Calvert');
                 $mail->addAddress($email);
                 $mail->Subject = 'This is a test email';
