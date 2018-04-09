@@ -1,13 +1,16 @@
 <?php 
 if(ifItIsMethod('post')) {
-    if(isset($_POST['username']) && isset($_POST['password'])) {
+    if(isset($_POST['login'])) {
+        if(isset($_POST['username']) && isset($_POST['password'])) {
         $username = escape($_POST['username']);
         $password = escape($_POST['password']);
         loginUser($username, $password);
+        }
+        else {
+            redirect('index.php');
+        }
     }
-    else {
-        redirect('index.php');
-    }
+    
 }
 ?>
 
