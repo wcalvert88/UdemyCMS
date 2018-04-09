@@ -1,9 +1,30 @@
 <?php 
 ob_start();
 function redirect($location) {
-    return exit(header("Location:" . $location));
+    header("Location:" . $location);
+    exit;
 }
 
+
+function ifItIsMethod($method=null) {
+    if($_SERVER['REQUEST_METHOD'] == strtoupper($method)){
+        return true;
+    }
+    return false;
+}
+
+function isLoggedIn() {
+    if(isset($_SESSION['userRole'])) {
+        return true;
+    }
+    return false;
+}
+
+function checkIfUserIsLoggedInAndRedirect($redirectLocation=null) {
+    if(isLoggedIn()) {
+        redirect($redirectLocation);
+    }
+}
 
 function escape($string) {
     global $connection;
