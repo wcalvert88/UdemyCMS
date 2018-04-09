@@ -16,6 +16,12 @@ if($stmt = mysqli_prepare($connection, 'SELECT username, user_email, token FROM 
     // if($_GET['token'] !== $token || $_GET['email'] !== $email) {
     //     redirect('index.php')
     // }
+
+    if(isset($_POST['password']) && isset($_POST['confirmPassword'])) {
+        if($_POST['password'] === $_POST['confirmPassword']) {
+            echo "They are both the same";
+        }
+    }
 }
 ?>
 <!-- Navigation -->
