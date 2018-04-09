@@ -1,5 +1,20 @@
-<?php  include "includes/db.php"; ?>
-<?php  include "includes/header.php"; ?>
+<?php  include "includes/db.php";
+include "includes/header.php"; 
+
+if(!ifItIsMethod('get') || !$_GET['forgot']) {
+    redirect('index.php');
+}
+  
+if(ifItIsMethod('post')) {
+    if(isset($_POST['email'])) {
+        $email = escape($_POST['email']);
+        $length = 50;
+        $token = bin2hex(openssl_random_pseudo_bytes($length));
+    }
+} 
+  
+?>
+
 
 
 <!-- Page Content -->
