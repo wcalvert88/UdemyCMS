@@ -34,7 +34,9 @@ if(ifItIsMethod('post')) {
                 $mail->addAddress($email);
                 $mail->Subject = 'This is a test email';
 
-                $mail->Body = '<h1>Email body</h1>';
+                $mail->Body = '<p>Please click to reset your password
+                <a href="http://localhost/UdemyCMS/reset.php?email=' . $email . '&token=' . $token . '">http://localhost/UdemyCMS/reset.php?email=' . $email . '&token=' . $token . '"</a>
+                </p>';
 
                 if($mail->send()){
                     echo "IT WAS SENT";
