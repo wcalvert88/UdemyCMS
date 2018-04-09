@@ -1,7 +1,7 @@
 <?php include "includes/db.php"; 
-include "includes/header.php"; ?>
-<?php 
+include "includes/header.php"; 
 
+require 'vendor/autoload.php';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = escape($_POST['username']);
     $email = escape($_POST['email']);
