@@ -19,8 +19,24 @@ if($stmt = mysqli_prepare($connection, 'SELECT username, user_email, token FROM 
 
     if(isset($_POST['password']) && isset($_POST['confirmPassword'])) {
         if($_POST['password'] === $_POST['confirmPassword']) {
-            echo "They are both the same";
+            $password = $_POST['password'];
+            $hashPassword = password_hash($password, PASSWORD_BCRYPT, array('cost'=>12));
+            
+            if($stmt = mysqli_prepare($connection, "UPDATE users SET token = '', user_password = '{$hashPassword}' WHERE user_email = ?")){
+                mysqli_stmt_bind_param($stmt, "s", $email);
+                mysqli_stmt_execute($stmt);
+
+                if(mysqli_stmt_affected_rows($stmt) >= 1) {
+                    echo "IT WAS AFFECTED";
+                }
+            } else {
+                echo "BAD QUERY";
+            }
+        } else {
+            echo "Passwords need to match";
         }
+    } else {
+        echo "Both fields need to contain the same password";
     }
 }
 ?>
