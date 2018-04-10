@@ -3,3 +3,4 @@ images
 cms.sql
 /vendor/
 /Classes/
+.env

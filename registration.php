@@ -2,7 +2,13 @@
 include "includes/header.php"; 
 require 'vendor/autoload.php';
 
-
+$dotenv = new \Dotenv\Dotenv(__DIR__);
+$dotenv->load();
+$options = array(
+    'cluster' => 'us2',
+    'encrypted' => true
+  );
+$pusher = new Pusher\Pusher(getenv('APP_KEY'), getenv('APP_SECRET'), getenv('APP_ID'), $options);
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = escape($_POST['username']);
@@ -45,7 +51,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     if(empty($error)) {
         registerUser($username, $email, $password);
-        $pusher->trigger('notifications', 'new_user', $username);
+        $data['message'] = $username;
+        $pusher->trigger('notifications', 'new_user', $data);
         loginUser($username, $password);
     }
 }
